@@ -1,17 +1,12 @@
-import os
 import time
-from pathlib import Path
-from dotenv import dotenv_values
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from quoin.config import get_config
 from .routes import policies, requests, memory, lab, proof, trace
 
 START_TIME = time.time()
 
-env_path = Path(__file__).resolve().parent.parent.parent / ".env.local"
-env_cfg = dotenv_values(env_path) if env_path.exists() else {}
-
-cors_env = os.environ.get("CORS_ORIGINS") or env_cfg.get("CORS_ORIGINS", "*")
+cors_env = get_config("CORS_ORIGINS", "*")
 allow_origins = [o.strip() for o in cors_env.split(",") if o.strip()] if cors_env != "*" else ["*"]
 
 app = FastAPI(

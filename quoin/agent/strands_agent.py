@@ -16,6 +16,7 @@ from .adapter import ProposalAdapter
 from .tools import query_policy_context
 from ..kernel.models import DecisionProposal
 from ..kernel.hasher import CanonicalHasher
+from ..config import get_config
 
 class StrandsProposalOutput(BaseModel):
     """Structured proposal emitted by the Strands Agent."""
@@ -26,35 +27,17 @@ class StrandsProposalOutput(BaseModel):
         description="Explicit operational reasoning explaining compliance or violation against policy rules"
     )
     target_generation: int = Field(
-        description="Candidate policy generation observed in Cognitive Memory and targeted by this proposal"
-    )
-    action: str = Field(
-        description="Requested operational action: apply_discount or issue_service_credit"
-    )
-    amount: float = Field(
-        description="Proposed financial or operational amount"
+        description="Authoritative policy generation observed during reasoning"
     )
     affected_path: str = Field(
-        description="Target resource path, e.g. /invoices/{invoice_id} or /accounts/{client_id}"
+        description="Target resource path that will be affected by the action"
     )
     payload_hash: str = Field(
-        description="Cryptographic SHA-256 hash digest of the incoming request payload"
-    )
-    client_id: str = Field(
-        default="client_unknown",
-        description="Customer or client identifier"
-    )
-    invoice_id: str = Field(
-        default="inv_unknown",
-        description="Invoice identifier if applicable"
-    )
-    client_tier: str = Field(
-        default="standard",
-        description="Client tier classification (standard, silver, gold)"
+        description="Canonical hash of the request payload"
     )
 
 class OperationalReasoningAgent:
-    """Strands-powered reasoning agent formulating proposals for professional operations."""
+    """Plane A: Reasoning agent using Strands SDK with Bedrock Nova Lite."""
 
     def __init__(
         self,
@@ -65,13 +48,10 @@ class OperationalReasoningAgent:
         self.memory_reader = memory_reader_callable
         self.enable_bedrock = enable_bedrock
 
-        env_path = Path(__file__).resolve().parent.parent.parent / ".env.local"
-        env_cfg = dotenv_values(env_path) if env_path.exists() else {}
-
-        self.model_id = model_id or env_cfg.get("BEDROCK_MODEL_ID", "us.amazon.nova-lite-v1:0")
-        self.region = env_cfg.get("AWS_REGION", "us-east-1")
-        self.access_key = env_cfg.get("AWS_ACCESS_KEY_ID")
-        self.secret_key = env_cfg.get("AWS_SECRET_ACCESS_KEY")
+        self.model_id = model_id or get_config("BEDROCK_MODEL_ID", "us.amazon.nova-lite-v1:0")
+        self.region = get_config("AWS_REGION", "us-east-1")
+        self.access_key = get_config("AWS_ACCESS_KEY_ID")
+        self.secret_key = get_config("AWS_SECRET_ACCESS_KEY")
 
         self._strands_agent = None
         self._bedrock_model = None

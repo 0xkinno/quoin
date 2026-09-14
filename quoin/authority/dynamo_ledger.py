@@ -13,18 +13,16 @@ from datetime import datetime, timezone
 from dotenv import dotenv_values
 from ..kernel.models import PolicyRecord, PolicyRule
 from ..kernel.hasher import CanonicalHasher
+from ..config import get_config
 
 class DynamoAuthorityLedger:
     """Authoritative Policy Store enforcing atomic cutovers and single-use permits."""
 
     def __init__(self, table_name: Optional[str] = None, region: Optional[str] = None):
-        env_path = Path(__file__).resolve().parent.parent.parent / ".env.local"
-        env_cfg = dotenv_values(env_path) if env_path.exists() else {}
-
-        self.table_name = table_name or env_cfg.get("DYNAMODB_TABLE_NAME") or env_cfg.get("QUOIN_DYNAMODB_TABLE")
-        self.region = region or env_cfg.get("AWS_REGION", "us-east-1")
-        self.access_key = env_cfg.get("AWS_ACCESS_KEY_ID")
-        self.secret_key = env_cfg.get("AWS_SECRET_ACCESS_KEY")
+        self.table_name = table_name or get_config("DYNAMODB_TABLE_NAME") or get_config("QUOIN_DYNAMODB_TABLE")
+        self.region = region or get_config("AWS_REGION", "us-east-1")
+        self.access_key = get_config("AWS_ACCESS_KEY_ID")
+        self.secret_key = get_config("AWS_SECRET_ACCESS_KEY")
 
         self.db_path = Path(__file__).resolve().parent.parent.parent / "evidence" / "authority_ledger.db"
         self.db_path.parent.mkdir(parents=True, exist_ok=True)

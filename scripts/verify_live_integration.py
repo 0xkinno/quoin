@@ -58,18 +58,13 @@ def main():
     print("QUOIN LIVE AWS DATA-PLANE INTEGRATION & VERIFICATION")
     print("=" * 70)
 
-    env_path = root_dir / ".env.local"
-    if not env_path.exists():
-        print(f"[FAIL] .env.local not found at {env_path}")
-        sys.exit(1)
-
-    cfg = dotenv_values(env_path)
-    aws_region = cfg.get("AWS_REGION", "us-east-1")
-    access_key = cfg.get("AWS_ACCESS_KEY_ID", "")
-    secret_key = cfg.get("AWS_SECRET_ACCESS_KEY", "")
-    model_id = cfg.get("BEDROCK_MODEL_ID", "us.amazon.nova-lite-v1:0")
-    memory_id = cfg.get("AGENTCORE_MEMORY_ID", "quoin-memory-prod-9a7b8c2d1e")
-    table_name = cfg.get("DYNAMODB_TABLE_NAME", "quoin_authority_ledger")
+    from quoin.config import get_config
+    aws_region = get_config("AWS_REGION", "us-east-1")
+    access_key = get_config("AWS_ACCESS_KEY_ID", "")
+    secret_key = get_config("AWS_SECRET_ACCESS_KEY", "")
+    model_id = get_config("BEDROCK_MODEL_ID", "us.amazon.nova-lite-v1:0")
+    memory_id = get_config("AGENTCORE_MEMORY_ID", "quoin-memory-prod-9a7b8c2d1e")
+    table_name = get_config("DYNAMODB_TABLE_NAME", "quoin_authority_ledger")
 
     commit_sha = get_git_commit_sha()
     utc_timestamp = datetime.now(timezone.utc).isoformat()

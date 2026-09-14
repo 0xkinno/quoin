@@ -14,6 +14,7 @@ from pathlib import Path
 from dotenv import dotenv_values
 from ..kernel.models import PolicyRecord, PolicyRule, AuthoritySnapshot
 from ..kernel.hasher import CanonicalHasher
+from ..config import get_config, get_quoin_mode
 from .namespaces import MemoryNamespaceManager
 from .local_simulator import LocalMemorySimulator
 
@@ -30,15 +31,12 @@ class AgentCoreMemoryClient:
         memory_id: Optional[str] = None,
         region: Optional[str] = None,
     ):
-        env_path = Path(__file__).resolve().parent.parent.parent / ".env.local"
-        env_cfg = dotenv_values(env_path) if env_path.exists() else {}
-
-        # Default mode is agentcore if configured, or local if explicitly set
-        self.mode = mode or env_cfg.get("QUOIN_MODE", "agentcore")
-        self.memory_id = memory_id or env_cfg.get("AGENTCORE_MEMORY_ID")
-        self.region = region or env_cfg.get("AWS_REGION", "us-east-1")
-        self.access_key = env_cfg.get("AWS_ACCESS_KEY_ID")
-        self.secret_key = env_cfg.get("AWS_SECRET_ACCESS_KEY")
+        # Resolve mode: explicit argument -> QUOIN_MODE env var -> auto-detection -> 'local'
+        self.mode = (mode or get_quoin_mode()).lower()
+        self.memory_id = memory_id or get_config("AGENTCORE_MEMORY_ID")
+        self.region = region or get_config("AWS_REGION", "us-east-1")
+        self.access_key = get_config("AWS_ACCESS_KEY_ID")
+        self.secret_key = get_config("AWS_SECRET_ACCESS_KEY")
 
         self.simulator: Optional[LocalMemorySimulator] = None
         self._boto_session = None
@@ -48,16 +46,16 @@ class AgentCoreMemoryClient:
         self.last_visibility_latency_ms: Optional[float] = None
 
         if self.mode == "agentcore":
-            # Blocker 1 & 4: Fail loudly if AWS credentials or memory ID are missing in production mode
+            # Fail loudly if AWS credentials or memory ID are missing in production mode
             if not self.access_key or not self.secret_key:
                 raise AgentCoreUnavailableError(
                     "QUOIN_MODE=agentcore requires AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY. "
-                    "Set credentials in .env.local or specify mode='local' for offline tests."
+                    "Set credentials in environment variables (Render/Docker) or .env.local, or specify QUOIN_MODE=local."
                 )
             if not self.memory_id:
                 raise AgentCoreUnavailableError(
                     "QUOIN_MODE=agentcore requires AGENTCORE_MEMORY_ID. "
-                    "Set AGENTCORE_MEMORY_ID in .env.local or specify mode='local' for offline tests."
+                    "Set AGENTCORE_MEMORY_ID in environment variables (Render/Docker) or .env.local, or specify QUOIN_MODE=local."
                 )
 
             try:
