@@ -11,6 +11,10 @@
 
 ---
 
+### AWS Agents for Humans 2026 · Professional Agents Track
+
+> QUOIN is a professional-agent authority layer for consequential operations where policies can change while an agent is still reasoning.
+
 <p align="center">
   <img src="docs/assets/quoin-banner.png" alt="QUOIN Platform Banner" width="100%" />
 </p>
@@ -25,7 +29,7 @@
 | Resource | Link | Description |
 | :--- | :--- | :--- |
 | **Interactive Web Application** | [quoin-six.vercel.app](https://quoin-six.vercel.app) *(Live Production)* | Next.js 14 editorial web application with Replay design aesthetic, scrub timeline, and operator console |
-| **Video Demonstration** | [YouTube Walkthrough](https://www.youtube.com/watch?v=placeholder) | Complete end-to-end technical walkthrough and live failure demonstration |
+| **Video Demonstration** | [YouTube Walkthrough](https://youtu.be/rLQe68ZDQEc?si=4FQalsnp1ki1PXvO) | Complete end-to-end technical walkthrough and live failure demonstration |
 | **FastAPI Backend Service** | [quoin-api.onrender.com](https://quoin-api.onrender.com) *(Live Production)* | Pure Python deterministic authority fence, DynamoDB CAS cutover gate, and Bedrock Nova Lite bridge ([Health API](https://quoin-api.onrender.com/api/health), [Swagger UI](https://quoin-api.onrender.com/docs)) |
 | **GitHub Repository** | [github.com/0xkinno/quoin](https://github.com/0xkinno/quoin) | Primary open-source codebase, test suites, and empirical evidence manifests |
 
@@ -211,10 +215,9 @@ python benchmarks/campaign.py
 npx playwright test tests/e2e --config=tests/e2e/playwright.config.ts
 ```
 
-
 ---
 
-## 13. End-to-End Product Flow
+## 12. End-to-End Product Flow
 
 <p align="center">
   <img src="docs/assets/quoin-product-flow.png" alt="QUOIN Six-Stage Product Flow" width="100%" />
@@ -230,7 +233,7 @@ The lifecycle of an operational request transitions through six strict causal st
 
 ---
 
-## 14. Core Invariant
+## 13. Core Invariant
 
 The fundamental mathematical invariant enforced by the QUOIN kernel is:
 
@@ -247,7 +250,7 @@ If any condition evaluates to false, the kernel fence triggers an immediate non-
 
 ---
 
-## 15. Data & Authority Lifecycle
+## 14. Data & Authority Lifecycle
 
 ```
 [Policy Revision] 
@@ -269,7 +272,7 @@ If any condition evaluates to false, the kernel fence triggers an immediate non-
 
 ---
 
-## 16. Break It Adversarial Campaign
+## 15. Break It Adversarial Campaign
 
 QUOIN was subjected to a comprehensive **27-attack adversarial break campaign** spanning all four architectural planes. All 27 attacks were completely neutralized with zero breaches.
 
@@ -307,7 +310,7 @@ Full attack vectors, execution transcripts, and validation assertions are docume
 
 ---
 
-## 17. Decision Trace Forensic Ledger
+## 16. Decision Trace Forensic Ledger
 
 Every operational request processed by QUOIN generates an immutable, tamper-evident cryptographic trace. Each event block in the trace contains:
 - `event_id`: Unique UUID4 identifier.
@@ -325,7 +328,7 @@ Any manual alteration of timestamps, policy generations, or executed amounts bre
 
 ---
 
-## 18. Controlled Causal Benchmark (100 Scenarios)
+## 17. Controlled Causal Benchmark (100 Scenarios)
 
 QUOIN was evaluated across a standardized benchmark of **100 operational scenarios** categorized into five distinct stress classes:
 
@@ -348,7 +351,7 @@ Raw empirical benchmark runs and scenario manifests are recorded in [`evidence/b
 
 ---
 
-## 19. Reproducibility
+## 18. Reproducibility
 
 Every measurement, benchmark result, and test reported in this document is fully reproducible using local deterministic commands:
 
@@ -373,7 +376,7 @@ python scripts/verify_all.py
 
 ---
 
-## 20. AWS & Strands Integration
+## 19. AWS & Strands Integration
 
 QUOIN integrates with native AWS AI and data infrastructure:
 
@@ -381,6 +384,28 @@ QUOIN integrates with native AWS AI and data infrastructure:
 - **Amazon Bedrock AgentCore Memory:** Ingests and stores organizational policies as semantic and episodic memories across tenant scopes.
 - **Amazon DynamoDB:** Serves as the authoritative, linearizable policy ledger. Implements conditional writes (`attribute_not_exists(generation)`) to guarantee atomic, single-leader cutover transitions.
 - **Local Fallback Mode:** When AWS credentials are not configured, QUOIN seamlessly engages local SQLite WAL and simulated memory to maintain full development and test coverage without mocking.
+
+---
+
+## 20. 🏆 Hackathon Track & Alignment
+ 
+**Track: Professional Agents**
+
+QUOIN is designed for professionals and operational teams delegating consequential, repetitive decisions to autonomous agents.
+
+The problem is not merely whether an agent can reason correctly. The problem is whether the authority that made its reasoning valid is still current when the side effect is committed.
+
+QUOIN addresses that gap with a deterministic policy-generation fence, authoritative DynamoDB CAS gate, single-use execution permits, and forensic decision traces.
+
+### Judging criteria
+
+| Criterion | QUOIN |
+|---|---|
+| Technical Implementation | Strands Agents + Amazon Bedrock + AgentCore Memory + DynamoDB authority ledger + deterministic execution kernel |
+| Design | Complete operator console, adversarial lab, forensic trace and proof center |
+| Potential Impact | Prevents stale-policy execution in discounts, refunds, contract exceptions and other consequential workflows |
+| Creativity & Originality | Treats agent authority freshness as a consistency problem rather than a prompt-safety problem |
+| Presentation | End-to-end live demonstration of reasoning → authority check → block/commit → proof |
 
 ---
 
