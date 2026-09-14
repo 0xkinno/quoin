@@ -16,7 +16,24 @@ class CutoverRequest(BaseModel):
 
 @router.get("")
 def get_current_policy(tenant_id: str = "agency_operations"):
-    snapshot = app_state.memory.get_active_snapshot(tenant_id)
+    try:
+        snapshot = app_state.memory.get_active_snapshot(tenant_id)
+    except Exception as e:
+        epoch, pol_hash, rec = app_state.authority_ledger.get_authoritative_epoch(tenant_id)
+        if rec:
+            return {
+                "status": "ACTIVE",
+                "tenant_id": tenant_id,
+                "generation": epoch,
+                "policy_id": rec.policy_id,
+                "policy_hash": pol_hash,
+                "visible_at": rec.effective_at.isoformat(),
+                "rules": [r.model_dump() for r in rec.rules],
+                "source": "authoritative_ledger",
+                "note": f"AgentCore sync pending: {e}",
+            }
+        raise HTTPException(status_code=503, detail=f"AgentCore unavailable: {e}")
+
     if not snapshot:
         raise HTTPException(status_code=404, detail="No active policy found for tenant")
     return {

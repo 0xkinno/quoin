@@ -19,9 +19,11 @@ def test_api_policies_get(client):
     assert data["generation"] >= 17
 
 def test_api_requests_evaluate_and_commit(client):
+    import uuid
+    req_id = f"req_api_{uuid.uuid4().hex[:8]}"
     # 1. Evaluate request
     eval_payload = {
-        "request_id": "req_api_test_01",
+        "request_id": req_id,
         "tenant_id": "agency_operations",
         "client_tier": "standard",
         "amount": 350.0,

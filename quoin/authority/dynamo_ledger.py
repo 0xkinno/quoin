@@ -21,7 +21,7 @@ class DynamoAuthorityLedger:
         env_path = Path(__file__).resolve().parent.parent.parent / ".env.local"
         env_cfg = dotenv_values(env_path) if env_path.exists() else {}
 
-        self.table_name = table_name or env_cfg.get("QUOIN_DYNAMODB_TABLE")
+        self.table_name = table_name or env_cfg.get("DYNAMODB_TABLE_NAME") or env_cfg.get("QUOIN_DYNAMODB_TABLE")
         self.region = region or env_cfg.get("AWS_REGION", "us-east-1")
         self.access_key = env_cfg.get("AWS_ACCESS_KEY_ID")
         self.secret_key = env_cfg.get("AWS_SECRET_ACCESS_KEY")
@@ -31,6 +31,7 @@ class DynamoAuthorityLedger:
         self._init_sqlite()
 
         self._dynamo_client = None
+        self.dynamodb_error: Optional[str] = None
         if self.table_name and self.access_key and self.secret_key:
             try:
                 import boto3
@@ -41,6 +42,7 @@ class DynamoAuthorityLedger:
                 )
                 self._dynamo_client = session.resource("dynamodb")
             except Exception as e:
+                self.dynamodb_error = str(e)
                 print(f"[WARN] DynamoDB connection error: {e}. Using durable local ledger.")
 
     def _init_sqlite(self):
@@ -87,6 +89,7 @@ class DynamoAuthorityLedger:
                     )
                     return int(item["epoch"]), item["policy_hash"], rec
             except Exception as e:
+                self.dynamodb_error = str(e)
                 print(f"[WARN] DynamoDB read error: {e}")
 
         # 2. Local Durable SQLite Store
@@ -98,16 +101,31 @@ class DynamoAuthorityLedger:
             )
             row = cursor.fetchone()
             if row:
-                policy_id, epoch, policy_hash, rules_json, updated_at = row
-                rules = [PolicyRule(**r) for r in json.loads(rules_json)]
-                rec = PolicyRecord(
-                    policy_id=policy_id,
-                    generation=epoch,
-                    version_hash=policy_hash,
-                    effective_at=datetime.fromisoformat(updated_at),
-                    scope="commercial",
-                    rules=rules,
-                )
+                policy_id, epoch, policy_hash, policy_json, updated_at = row
+                try:
+                    data = json.loads(policy_json)
+                    if isinstance(data, dict) and "rules" in data:
+                        rec = PolicyRecord(**data)
+                    else:
+                        rules = [PolicyRule(**r) for r in data]
+                        rec = PolicyRecord(
+                            policy_id=policy_id,
+                            generation=epoch,
+                            version_hash=policy_hash,
+                            effective_at=datetime.fromisoformat(updated_at),
+                            scope="commercial",
+                            rules=rules,
+                        )
+                except Exception:
+                    rules = [PolicyRule(**r) for r in json.loads(policy_json)]
+                    rec = PolicyRecord(
+                        policy_id=policy_id,
+                        generation=epoch,
+                        version_hash=policy_hash,
+                        effective_at=datetime.fromisoformat(updated_at),
+                        scope="commercial",
+                        rules=rules,
+                    )
                 return epoch, policy_hash, rec
 
         # Default genesis state (G17)
@@ -129,12 +147,27 @@ class DynamoAuthorityLedger:
         return 17, h, genesis_rec
 
     def set_initial_policy(self, tenant_id: str, policy: PolicyRecord, policy_hash: str):
-        rules_json = json.dumps([r.model_dump() for r in policy.rules])
-        now_iso = datetime.now(timezone.utc).isoformat()
+        policy_json = json.dumps(policy.model_dump(), default=str)
+        eff_iso = policy.effective_at.isoformat()
+        if self._dynamo_client and self.table_name:
+            try:
+                table = self._dynamo_client.Table(self.table_name)
+                table.put_item(
+                    Item={
+                        "tenant_id": tenant_id,
+                        "policy_id": policy.policy_id,
+                        "epoch": policy.generation,
+                        "policy_hash": policy_hash,
+                        "rules_json": policy_json,
+                        "updated_at": eff_iso,
+                    }
+                )
+            except Exception as e:
+                self.dynamodb_error = str(e)
         with sqlite3.connect(self.db_path) as conn:
             conn.execute(
                 "INSERT OR REPLACE INTO policy_epochs (tenant_id, policy_id, epoch, policy_hash, rules_json, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
-                (tenant_id, policy.policy_id, policy.generation, policy_hash, rules_json, now_iso)
+                (tenant_id, policy.policy_id, policy.generation, policy_hash, policy_json, eff_iso)
             )
             conn.commit()
 
@@ -146,8 +179,9 @@ class DynamoAuthorityLedger:
     ) -> Tuple[bool, int, str]:
         """Perform optimistic locking conditional cutover: epoch must equal expected_epoch."""
         new_hash = CanonicalHasher.hash_policy(new_policy)
-        rules_json = json.dumps([r.model_dump() for r in new_policy.rules])
-        now_iso = datetime.now(timezone.utc).isoformat()
+        new_policy.version_hash = new_hash
+        policy_json = json.dumps(new_policy.model_dump(), default=str)
+        eff_iso = new_policy.effective_at.isoformat()
 
         # 1. DynamoDB conditional update
         if self._dynamo_client and self.table_name:
@@ -159,15 +193,26 @@ class DynamoAuthorityLedger:
                         "policy_id": new_policy.policy_id,
                         "epoch": new_policy.generation,
                         "policy_hash": new_hash,
-                        "rules_json": rules_json,
-                        "updated_at": now_iso,
+                        "rules_json": policy_json,
+                        "updated_at": eff_iso,
                     },
                     ConditionExpression="epoch = :exp OR attribute_not_exists(epoch)",
                     ExpressionAttributeValues={":exp": expected_epoch},
                 )
+                # Succeeded in DynamoDB; keep SQLite mirror updated
+                with sqlite3.connect(self.db_path) as conn:
+                    conn.execute(
+                        "INSERT OR REPLACE INTO policy_epochs (tenant_id, policy_id, epoch, policy_hash, rules_json, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+                        (tenant_id, new_policy.policy_id, new_policy.generation, new_hash, policy_json, eff_iso)
+                    )
+                    conn.commit()
                 return True, new_policy.generation, new_hash
             except Exception as e:
-                return False, expected_epoch, f"DynamoDB conditional check failed: {e}"
+                err_code = getattr(e, "response", {}).get("Error", {}).get("Code", "")
+                if err_code == "ConditionalCheckFailedException" or "ConditionalCheckFailedException" in str(e):
+                    return False, expected_epoch, f"CAS Epoch Mismatch in DynamoDB: {e}"
+                # If DynamoDB is inaccessible or has permission issues, record error and fall back to SQLite
+                self.dynamodb_error = str(e)
 
         # 2. SQLite atomic conditional update
         with sqlite3.connect(self.db_path) as conn:
@@ -183,7 +228,7 @@ class DynamoAuthorityLedger:
                 """UPDATE policy_epochs 
                    SET epoch = ?, policy_hash = ?, rules_json = ?, updated_at = ? 
                    WHERE tenant_id = ? AND epoch = ?""",
-                (new_policy.generation, new_hash, rules_json, now_iso, tenant_id, expected_epoch)
+                (new_policy.generation, new_hash, policy_json, eff_iso, tenant_id, expected_epoch)
             )
             if cursor.rowcount == 1:
                 conn.commit()
@@ -219,3 +264,12 @@ class DynamoAuthorityLedger:
                 return True
             except sqlite3.IntegrityError:
                 return False
+
+    def status(self) -> Dict[str, Any]:
+        return {
+            "table_name": self.table_name,
+            "region": self.region,
+            "dynamodb_configured": bool(self.table_name and self._dynamo_client),
+            "dynamodb_error": self.dynamodb_error,
+            "active_storage": "dynamodb" if (self._dynamo_client and not self.dynamodb_error) else "sqlite_durable_ledger",
+        }

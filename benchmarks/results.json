@@ -1,7 +1,7 @@
 {
   "metadata": {
     "campaign": "Controlled Causal Benchmark: Baseline vs QUOIN",
-    "timestamp": "2026-09-14T11:56:23.432467+00:00",
+    "timestamp": "2026-09-14T15:16:59.439426+00:00",
     "total_scenarios": 100
   },
   "summary": {
@@ -11,8 +11,8 @@
     "authorized_effects_preserved": 8,
     "duplicate_executions_prevented": 25,
     "false_blocks": 0,
-    "verification_overhead_ms_p50": 0.6,
-    "verification_overhead_ms_p95": 1.33
+    "verification_overhead_ms_p50": 0.67,
+    "verification_overhead_ms_p95": 2.02
   },
   "comparisons": [
     {
@@ -22,14 +22,14 @@
         "scenario_id": "SCEN_001",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.39
+        "latency_ms": 0.202
       },
       "quoin": {
         "scenario_id": "SCEN_001",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 1.191,
-        "added_overhead_ms": 0.801
+        "latency_ms": 0.809,
+        "added_overhead_ms": 0.607
       }
     },
     {
@@ -39,14 +39,14 @@
         "scenario_id": "SCEN_002",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.291
+        "latency_ms": 0.247
       },
       "quoin": {
         "scenario_id": "SCEN_002",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.706,
-        "added_overhead_ms": 0.415
+        "latency_ms": 0.694,
+        "added_overhead_ms": 0.446
       }
     },
     {
@@ -56,14 +56,14 @@
         "scenario_id": "SCEN_003",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.214
+        "latency_ms": 0.148
       },
       "quoin": {
         "scenario_id": "SCEN_003",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.928,
-        "added_overhead_ms": 0.715
+        "latency_ms": 0.739,
+        "added_overhead_ms": 0.591
       }
     },
     {
@@ -73,14 +73,14 @@
         "scenario_id": "SCEN_004",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.142
+        "latency_ms": 0.158
       },
       "quoin": {
         "scenario_id": "SCEN_004",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.628,
-        "added_overhead_ms": 0.486
+        "latency_ms": 0.723,
+        "added_overhead_ms": 0.565
       }
     },
     {
@@ -90,14 +90,14 @@
         "scenario_id": "SCEN_005",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.155
+        "latency_ms": 0.152
       },
       "quoin": {
         "scenario_id": "SCEN_005",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.767,
-        "added_overhead_ms": 0.612
+        "latency_ms": 0.771,
+        "added_overhead_ms": 0.62
       }
     },
     {
@@ -107,14 +107,14 @@
         "scenario_id": "SCEN_006",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.15
+        "latency_ms": 0.157
       },
       "quoin": {
         "scenario_id": "SCEN_006",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.697,
-        "added_overhead_ms": 0.548
+        "latency_ms": 0.766,
+        "added_overhead_ms": 0.609
       }
     },
     {
@@ -124,14 +124,14 @@
         "scenario_id": "SCEN_007",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.169
+        "latency_ms": 0.155
       },
       "quoin": {
         "scenario_id": "SCEN_007",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.653,
-        "added_overhead_ms": 0.483
+        "latency_ms": 0.76,
+        "added_overhead_ms": 0.606
       }
     },
     {
@@ -141,14 +141,14 @@
         "scenario_id": "SCEN_008",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.163
+        "latency_ms": 0.158
       },
       "quoin": {
         "scenario_id": "SCEN_008",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.763,
-        "added_overhead_ms": 0.599
+        "latency_ms": 0.878,
+        "added_overhead_ms": 0.72
       }
     },
     {
@@ -158,14 +158,14 @@
         "scenario_id": "SCEN_009",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.155
+        "latency_ms": 0.289
       },
       "quoin": {
         "scenario_id": "SCEN_009",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.732,
-        "added_overhead_ms": 0.577
+        "latency_ms": 0.85,
+        "added_overhead_ms": 0.561
       }
     },
     {
@@ -175,14 +175,14 @@
         "scenario_id": "SCEN_010",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.159
+        "latency_ms": 0.143
       },
       "quoin": {
         "scenario_id": "SCEN_010",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 1.11,
-        "added_overhead_ms": 0.951
+        "latency_ms": 0.687,
+        "added_overhead_ms": 0.544
       }
     },
     {
@@ -192,14 +192,14 @@
         "scenario_id": "SCEN_011",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.316
+        "latency_ms": 0.144
       },
       "quoin": {
         "scenario_id": "SCEN_011",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.625,
-        "added_overhead_ms": 0.309
+        "latency_ms": 0.851,
+        "added_overhead_ms": 0.706
       }
     },
     {
@@ -209,14 +209,14 @@
         "scenario_id": "SCEN_012",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.148
+        "latency_ms": 0.313
       },
       "quoin": {
         "scenario_id": "SCEN_012",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.579,
-        "added_overhead_ms": 0.431
+        "latency_ms": 1.218,
+        "added_overhead_ms": 0.905
       }
     },
     {
@@ -226,14 +226,14 @@
         "scenario_id": "SCEN_013",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.15
+        "latency_ms": 0.164
       },
       "quoin": {
         "scenario_id": "SCEN_013",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.686,
-        "added_overhead_ms": 0.536
+        "latency_ms": 0.742,
+        "added_overhead_ms": 0.578
       }
     },
     {
@@ -243,14 +243,14 @@
         "scenario_id": "SCEN_014",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.19
+        "latency_ms": 0.158
       },
       "quoin": {
         "scenario_id": "SCEN_014",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.684,
-        "added_overhead_ms": 0.494
+        "latency_ms": 0.702,
+        "added_overhead_ms": 0.544
       }
     },
     {
@@ -260,14 +260,14 @@
         "scenario_id": "SCEN_015",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.145
+        "latency_ms": 0.153
       },
       "quoin": {
         "scenario_id": "SCEN_015",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.64,
-        "added_overhead_ms": 0.495
+        "latency_ms": 0.703,
+        "added_overhead_ms": 0.55
       }
     },
     {
@@ -277,14 +277,14 @@
         "scenario_id": "SCEN_016",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.153
+        "latency_ms": 0.148
       },
       "quoin": {
         "scenario_id": "SCEN_016",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 1.188,
-        "added_overhead_ms": 1.034
+        "latency_ms": 0.973,
+        "added_overhead_ms": 0.826
       }
     },
     {
@@ -294,14 +294,14 @@
         "scenario_id": "SCEN_017",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.302
+        "latency_ms": 0.318
       },
       "quoin": {
         "scenario_id": "SCEN_017",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.697,
-        "added_overhead_ms": 0.395
+        "latency_ms": 1.3,
+        "added_overhead_ms": 0.982
       }
     },
     {
@@ -311,14 +311,14 @@
         "scenario_id": "SCEN_018",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.158
+        "latency_ms": 0.292
       },
       "quoin": {
         "scenario_id": "SCEN_018",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.68,
-        "added_overhead_ms": 0.522
+        "latency_ms": 0.964,
+        "added_overhead_ms": 0.672
       }
     },
     {
@@ -328,14 +328,14 @@
         "scenario_id": "SCEN_019",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.178
+        "latency_ms": 0.172
       },
       "quoin": {
         "scenario_id": "SCEN_019",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.775,
-        "added_overhead_ms": 0.596
+        "latency_ms": 0.645,
+        "added_overhead_ms": 0.473
       }
     },
     {
@@ -345,14 +345,14 @@
         "scenario_id": "SCEN_020",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.172
+        "latency_ms": 0.246
       },
       "quoin": {
         "scenario_id": "SCEN_020",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.763,
-        "added_overhead_ms": 0.591
+        "latency_ms": 1.826,
+        "added_overhead_ms": 1.58
       }
     },
     {
@@ -362,14 +362,14 @@
         "scenario_id": "SCEN_021",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.172
+        "latency_ms": 0.362
       },
       "quoin": {
         "scenario_id": "SCEN_021",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.283,
-        "added_overhead_ms": 0.111
+        "latency_ms": 0.255,
+        "added_overhead_ms": -0.106
       }
     },
     {
@@ -379,14 +379,14 @@
         "scenario_id": "SCEN_022",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.22
+        "latency_ms": 0.15
       },
       "quoin": {
         "scenario_id": "SCEN_022",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.792,
-        "added_overhead_ms": 0.572
+        "latency_ms": 0.824,
+        "added_overhead_ms": 0.675
       }
     },
     {
@@ -396,14 +396,14 @@
         "scenario_id": "SCEN_023",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.17
+        "latency_ms": 0.186
       },
       "quoin": {
         "scenario_id": "SCEN_023",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.249,
-        "added_overhead_ms": 0.079
+        "latency_ms": 0.292,
+        "added_overhead_ms": 0.106
       }
     },
     {
@@ -413,14 +413,14 @@
         "scenario_id": "SCEN_024",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.173
+        "latency_ms": 0.192
       },
       "quoin": {
         "scenario_id": "SCEN_024",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 1.281,
-        "added_overhead_ms": 1.108
+        "latency_ms": 0.724,
+        "added_overhead_ms": 0.532
       }
     },
     {
@@ -430,14 +430,14 @@
         "scenario_id": "SCEN_025",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.366
+        "latency_ms": 0.147
       },
       "quoin": {
         "scenario_id": "SCEN_025",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.286,
-        "added_overhead_ms": -0.08
+        "latency_ms": 0.24,
+        "added_overhead_ms": 0.094
       }
     },
     {
@@ -447,14 +447,14 @@
         "scenario_id": "SCEN_026",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.18
+        "latency_ms": 0.314
       },
       "quoin": {
         "scenario_id": "SCEN_026",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.743,
-        "added_overhead_ms": 0.563
+        "latency_ms": 0.834,
+        "added_overhead_ms": 0.521
       }
     },
     {
@@ -464,14 +464,14 @@
         "scenario_id": "SCEN_027",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.186
+        "latency_ms": 0.194
       },
       "quoin": {
         "scenario_id": "SCEN_027",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.31,
-        "added_overhead_ms": 0.123
+        "latency_ms": 0.297,
+        "added_overhead_ms": 0.103
       }
     },
     {
@@ -481,14 +481,14 @@
         "scenario_id": "SCEN_028",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.175
+        "latency_ms": 0.149
       },
       "quoin": {
         "scenario_id": "SCEN_028",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.772,
-        "added_overhead_ms": 0.597
+        "latency_ms": 0.821,
+        "added_overhead_ms": 0.671
       }
     },
     {
@@ -498,14 +498,14 @@
         "scenario_id": "SCEN_029",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.169
+        "latency_ms": 0.183
       },
       "quoin": {
         "scenario_id": "SCEN_029",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.411,
-        "added_overhead_ms": 0.242
+        "latency_ms": 0.266,
+        "added_overhead_ms": 0.083
       }
     },
     {
@@ -515,14 +515,14 @@
         "scenario_id": "SCEN_030",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.182
+        "latency_ms": 0.174
       },
       "quoin": {
         "scenario_id": "SCEN_030",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 1.259,
-        "added_overhead_ms": 1.077
+        "latency_ms": 0.712,
+        "added_overhead_ms": 0.538
       }
     },
     {
@@ -532,14 +532,14 @@
         "scenario_id": "SCEN_031",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.01
+        "latency_ms": 0.009
       },
       "quoin": {
         "scenario_id": "SCEN_031",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.543,
-        "added_overhead_ms": 1.533
+        "latency_ms": 2.797,
+        "added_overhead_ms": 2.788
       }
     },
     {
@@ -549,14 +549,14 @@
         "scenario_id": "SCEN_032",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.011
+        "latency_ms": 0.024
       },
       "quoin": {
         "scenario_id": "SCEN_032",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 2.098,
-        "added_overhead_ms": 2.087
+        "latency_ms": 1.831,
+        "added_overhead_ms": 1.807
       }
     },
     {
@@ -566,14 +566,14 @@
         "scenario_id": "SCEN_033",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.009
+        "latency_ms": 0.01
       },
       "quoin": {
         "scenario_id": "SCEN_033",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.266,
-        "added_overhead_ms": 1.257
+        "latency_ms": 2.135,
+        "added_overhead_ms": 2.125
       }
     },
     {
@@ -583,14 +583,14 @@
         "scenario_id": "SCEN_034",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.007
+        "latency_ms": 0.008
       },
       "quoin": {
         "scenario_id": "SCEN_034",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.181,
-        "added_overhead_ms": 1.174
+        "latency_ms": 1.464,
+        "added_overhead_ms": 1.456
       }
     },
     {
@@ -600,14 +600,14 @@
         "scenario_id": "SCEN_035",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.009
+        "latency_ms": 0.014
       },
       "quoin": {
         "scenario_id": "SCEN_035",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.211,
-        "added_overhead_ms": 1.203
+        "latency_ms": 1.766,
+        "added_overhead_ms": 1.752
       }
     },
     {
@@ -617,14 +617,14 @@
         "scenario_id": "SCEN_036",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.008
+        "latency_ms": 0.009
       },
       "quoin": {
         "scenario_id": "SCEN_036",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.174,
-        "added_overhead_ms": 1.166
+        "latency_ms": 1.988,
+        "added_overhead_ms": 1.979
       }
     },
     {
@@ -634,14 +634,14 @@
         "scenario_id": "SCEN_037",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.008
+        "latency_ms": 0.012
       },
       "quoin": {
         "scenario_id": "SCEN_037",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.256,
-        "added_overhead_ms": 1.248
+        "latency_ms": 2.036,
+        "added_overhead_ms": 2.023
       }
     },
     {
@@ -651,14 +651,14 @@
         "scenario_id": "SCEN_038",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.009
+        "latency_ms": 0.011
       },
       "quoin": {
         "scenario_id": "SCEN_038",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.331,
-        "added_overhead_ms": 1.322
+        "latency_ms": 1.929,
+        "added_overhead_ms": 1.917
       }
     },
     {
@@ -668,14 +668,14 @@
         "scenario_id": "SCEN_039",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.008
+        "latency_ms": 0.009
       },
       "quoin": {
         "scenario_id": "SCEN_039",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.189,
-        "added_overhead_ms": 1.182
+        "latency_ms": 1.951,
+        "added_overhead_ms": 1.942
       }
     },
     {
@@ -685,14 +685,14 @@
         "scenario_id": "SCEN_040",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.008
+        "latency_ms": 0.01
       },
       "quoin": {
         "scenario_id": "SCEN_040",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.422,
-        "added_overhead_ms": 1.414
+        "latency_ms": 2.069,
+        "added_overhead_ms": 2.059
       }
     },
     {
@@ -702,14 +702,14 @@
         "scenario_id": "SCEN_041",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.009
+        "latency_ms": 0.011
       },
       "quoin": {
         "scenario_id": "SCEN_041",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.247,
-        "added_overhead_ms": 1.238
+        "latency_ms": 1.591,
+        "added_overhead_ms": 1.581
       }
     },
     {
@@ -719,14 +719,14 @@
         "scenario_id": "SCEN_042",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.01
+        "latency_ms": 0.011
       },
       "quoin": {
         "scenario_id": "SCEN_042",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.174,
-        "added_overhead_ms": 1.164
+        "latency_ms": 1.397,
+        "added_overhead_ms": 1.387
       }
     },
     {
@@ -742,8 +742,8 @@
         "scenario_id": "SCEN_043",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.243,
-        "added_overhead_ms": 1.235
+        "latency_ms": 1.556,
+        "added_overhead_ms": 1.548
       }
     },
     {
@@ -753,14 +753,14 @@
         "scenario_id": "SCEN_044",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.009
+        "latency_ms": 0.016
       },
       "quoin": {
         "scenario_id": "SCEN_044",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.257,
-        "added_overhead_ms": 1.248
+        "latency_ms": 1.936,
+        "added_overhead_ms": 1.92
       }
     },
     {
@@ -770,14 +770,14 @@
         "scenario_id": "SCEN_045",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.008
+        "latency_ms": 0.012
       },
       "quoin": {
         "scenario_id": "SCEN_045",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.22,
-        "added_overhead_ms": 1.212
+        "latency_ms": 1.528,
+        "added_overhead_ms": 1.516
       }
     },
     {
@@ -787,14 +787,14 @@
         "scenario_id": "SCEN_046",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.008
+        "latency_ms": 0.009
       },
       "quoin": {
         "scenario_id": "SCEN_046",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.238,
-        "added_overhead_ms": 1.23
+        "latency_ms": 1.543,
+        "added_overhead_ms": 1.534
       }
     },
     {
@@ -804,14 +804,14 @@
         "scenario_id": "SCEN_047",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.009
+        "latency_ms": 0.01
       },
       "quoin": {
         "scenario_id": "SCEN_047",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.25,
-        "added_overhead_ms": 1.241
+        "latency_ms": 1.399,
+        "added_overhead_ms": 1.39
       }
     },
     {
@@ -821,14 +821,14 @@
         "scenario_id": "SCEN_048",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.009
+        "latency_ms": 0.01
       },
       "quoin": {
         "scenario_id": "SCEN_048",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.394,
-        "added_overhead_ms": 1.385
+        "latency_ms": 1.503,
+        "added_overhead_ms": 1.493
       }
     },
     {
@@ -844,8 +844,8 @@
         "scenario_id": "SCEN_049",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.144,
-        "added_overhead_ms": 1.136
+        "latency_ms": 1.81,
+        "added_overhead_ms": 1.802
       }
     },
     {
@@ -855,14 +855,14 @@
         "scenario_id": "SCEN_050",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.008
+        "latency_ms": 0.016
       },
       "quoin": {
         "scenario_id": "SCEN_050",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.156,
-        "added_overhead_ms": 1.148
+        "latency_ms": 1.496,
+        "added_overhead_ms": 1.48
       }
     },
     {
@@ -872,14 +872,14 @@
         "scenario_id": "SCEN_051",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.009
+        "latency_ms": 0.015
       },
       "quoin": {
         "scenario_id": "SCEN_051",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.234,
-        "added_overhead_ms": 1.226
+        "latency_ms": 1.697,
+        "added_overhead_ms": 1.682
       }
     },
     {
@@ -889,14 +889,14 @@
         "scenario_id": "SCEN_052",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.008
+        "latency_ms": 0.009
       },
       "quoin": {
         "scenario_id": "SCEN_052",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.217,
-        "added_overhead_ms": 1.21
+        "latency_ms": 2.624,
+        "added_overhead_ms": 2.615
       }
     },
     {
@@ -906,14 +906,14 @@
         "scenario_id": "SCEN_053",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.009
+        "latency_ms": 0.016
       },
       "quoin": {
         "scenario_id": "SCEN_053",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.297,
-        "added_overhead_ms": 1.288
+        "latency_ms": 2.593,
+        "added_overhead_ms": 2.577
       }
     },
     {
@@ -923,14 +923,14 @@
         "scenario_id": "SCEN_054",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.011
+        "latency_ms": 0.017
       },
       "quoin": {
         "scenario_id": "SCEN_054",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.491,
-        "added_overhead_ms": 1.48
+        "latency_ms": 1.47,
+        "added_overhead_ms": 1.453
       }
     },
     {
@@ -946,8 +946,8 @@
         "scenario_id": "SCEN_055",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.187,
-        "added_overhead_ms": 1.18
+        "latency_ms": 1.529,
+        "added_overhead_ms": 1.521
       }
     },
     {
@@ -957,14 +957,14 @@
         "scenario_id": "SCEN_056",
         "status": "COMMITTED",
         "stale_execution_committed": null,
-        "latency_ms": 0.006
+        "latency_ms": 0.011
       },
       "quoin": {
         "scenario_id": "SCEN_056",
         "status": "COMMITTED",
         "stale_execution_committed": false,
-        "latency_ms": 0.705,
-        "added_overhead_ms": 0.699
+        "latency_ms": 0.887,
+        "added_overhead_ms": 0.876
       }
     },
     {
@@ -974,14 +974,14 @@
         "scenario_id": "SCEN_057",
         "status": "COMMITTED",
         "stale_execution_committed": null,
-        "latency_ms": 0.005
+        "latency_ms": 0.006
       },
       "quoin": {
         "scenario_id": "SCEN_057",
         "status": "COMMITTED",
         "stale_execution_committed": false,
-        "latency_ms": 0.661,
-        "added_overhead_ms": 0.655
+        "latency_ms": 1.168,
+        "added_overhead_ms": 1.162
       }
     },
     {
@@ -991,14 +991,14 @@
         "scenario_id": "SCEN_058",
         "status": "BLOCKED_POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.005
+        "latency_ms": 0.006
       },
       "quoin": {
         "scenario_id": "SCEN_058",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.21,
-        "added_overhead_ms": 0.205
+        "latency_ms": 0.279,
+        "added_overhead_ms": 0.273
       }
     },
     {
@@ -1014,8 +1014,8 @@
         "scenario_id": "SCEN_059",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.239,
-        "added_overhead_ms": 0.234
+        "latency_ms": 0.257,
+        "added_overhead_ms": 0.252
       }
     },
     {
@@ -1025,14 +1025,14 @@
         "scenario_id": "SCEN_060",
         "status": "COMMITTED",
         "stale_execution_committed": null,
-        "latency_ms": 0.009
+        "latency_ms": 0.006
       },
       "quoin": {
         "scenario_id": "SCEN_060",
         "status": "COMMITTED",
         "stale_execution_committed": false,
-        "latency_ms": 0.697,
-        "added_overhead_ms": 0.688
+        "latency_ms": 0.83,
+        "added_overhead_ms": 0.824
       }
     },
     {
@@ -1048,8 +1048,8 @@
         "scenario_id": "SCEN_061",
         "status": "COMMITTED",
         "stale_execution_committed": false,
-        "latency_ms": 0.623,
-        "added_overhead_ms": 0.617
+        "latency_ms": 0.996,
+        "added_overhead_ms": 0.99
       }
     },
     {
@@ -1065,8 +1065,8 @@
         "scenario_id": "SCEN_062",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.223,
-        "added_overhead_ms": 0.218
+        "latency_ms": 0.285,
+        "added_overhead_ms": 0.279
       }
     },
     {
@@ -1082,8 +1082,8 @@
         "scenario_id": "SCEN_063",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.238,
-        "added_overhead_ms": 0.233
+        "latency_ms": 0.276,
+        "added_overhead_ms": 0.271
       }
     },
     {
@@ -1093,14 +1093,14 @@
         "scenario_id": "SCEN_064",
         "status": "COMMITTED",
         "stale_execution_committed": null,
-        "latency_ms": 0.006
+        "latency_ms": 0.033
       },
       "quoin": {
         "scenario_id": "SCEN_064",
         "status": "COMMITTED",
         "stale_execution_committed": false,
-        "latency_ms": 0.648,
-        "added_overhead_ms": 0.642
+        "latency_ms": 0.784,
+        "added_overhead_ms": 0.752
       }
     },
     {
@@ -1116,8 +1116,8 @@
         "scenario_id": "SCEN_065",
         "status": "COMMITTED",
         "stale_execution_committed": false,
-        "latency_ms": 0.662,
-        "added_overhead_ms": 0.656
+        "latency_ms": 0.741,
+        "added_overhead_ms": 0.735
       }
     },
     {
@@ -1133,8 +1133,8 @@
         "scenario_id": "SCEN_066",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.244,
-        "added_overhead_ms": 0.239
+        "latency_ms": 0.263,
+        "added_overhead_ms": 0.258
       }
     },
     {
@@ -1144,14 +1144,14 @@
         "scenario_id": "SCEN_067",
         "status": "BLOCKED_POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.008
+        "latency_ms": 0.005
       },
       "quoin": {
         "scenario_id": "SCEN_067",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.275,
-        "added_overhead_ms": 0.267
+        "latency_ms": 0.274,
+        "added_overhead_ms": 0.269
       }
     },
     {
@@ -1161,14 +1161,14 @@
         "scenario_id": "SCEN_068",
         "status": "COMMITTED",
         "stale_execution_committed": null,
-        "latency_ms": 0.006
+        "latency_ms": 0.007
       },
       "quoin": {
         "scenario_id": "SCEN_068",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.225,
-        "added_overhead_ms": 0.219
+        "latency_ms": 0.296,
+        "added_overhead_ms": 0.288
       }
     },
     {
@@ -1178,14 +1178,14 @@
         "scenario_id": "SCEN_069",
         "status": "COMMITTED",
         "stale_execution_committed": null,
-        "latency_ms": 0.006
+        "latency_ms": 0.007
       },
       "quoin": {
         "scenario_id": "SCEN_069",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.208,
-        "added_overhead_ms": 0.202
+        "latency_ms": 0.282,
+        "added_overhead_ms": 0.275
       }
     },
     {
@@ -1195,14 +1195,14 @@
         "scenario_id": "SCEN_070",
         "status": "BLOCKED_POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.006
+        "latency_ms": 0.007
       },
       "quoin": {
         "scenario_id": "SCEN_070",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.205,
-        "added_overhead_ms": 0.199
+        "latency_ms": 0.25,
+        "added_overhead_ms": 0.244
       }
     },
     {
@@ -1218,8 +1218,8 @@
         "scenario_id": "SCEN_071",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.26,
-        "added_overhead_ms": 0.254
+        "latency_ms": 0.243,
+        "added_overhead_ms": 0.237
       }
     },
     {
@@ -1235,8 +1235,8 @@
         "scenario_id": "SCEN_072",
         "status": "COMMITTED",
         "stale_execution_committed": false,
-        "latency_ms": 0.726,
-        "added_overhead_ms": 0.72
+        "latency_ms": 0.781,
+        "added_overhead_ms": 0.775
       }
     },
     {
@@ -1252,8 +1252,8 @@
         "scenario_id": "SCEN_073",
         "status": "COMMITTED",
         "stale_execution_committed": false,
-        "latency_ms": 0.831,
-        "added_overhead_ms": 0.825
+        "latency_ms": 0.777,
+        "added_overhead_ms": 0.771
       }
     },
     {
@@ -1269,8 +1269,8 @@
         "scenario_id": "SCEN_074",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.418,
-        "added_overhead_ms": 0.414
+        "latency_ms": 0.312,
+        "added_overhead_ms": 0.308
       }
     },
     {
@@ -1280,14 +1280,14 @@
         "scenario_id": "SCEN_075",
         "status": "BLOCKED_POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.009
+        "latency_ms": 0.006
       },
       "quoin": {
         "scenario_id": "SCEN_075",
         "status": "POLICY_VIOLATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.279,
-        "added_overhead_ms": 0.27
+        "latency_ms": 0.33,
+        "added_overhead_ms": 0.324
       }
     },
     {
@@ -1297,14 +1297,14 @@
         "scenario_id": "SCEN_076",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.167
+        "latency_ms": 0.193
       },
       "quoin": {
         "scenario_id": "SCEN_076",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.696,
-        "added_overhead_ms": 0.529
+        "latency_ms": 0.834,
+        "added_overhead_ms": 0.641
       }
     },
     {
@@ -1314,14 +1314,14 @@
         "scenario_id": "SCEN_077",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.161
+        "latency_ms": 0.205
       },
       "quoin": {
         "scenario_id": "SCEN_077",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.766,
-        "added_overhead_ms": 0.606
+        "latency_ms": 0.844,
+        "added_overhead_ms": 0.639
       }
     },
     {
@@ -1331,14 +1331,14 @@
         "scenario_id": "SCEN_078",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.169
+        "latency_ms": 0.192
       },
       "quoin": {
         "scenario_id": "SCEN_078",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.718,
-        "added_overhead_ms": 0.549
+        "latency_ms": 0.871,
+        "added_overhead_ms": 0.679
       }
     },
     {
@@ -1348,14 +1348,14 @@
         "scenario_id": "SCEN_079",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.194
+        "latency_ms": 0.16
       },
       "quoin": {
         "scenario_id": "SCEN_079",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.725,
-        "added_overhead_ms": 0.531
+        "latency_ms": 1.447,
+        "added_overhead_ms": 1.288
       }
     },
     {
@@ -1365,14 +1365,14 @@
         "scenario_id": "SCEN_080",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.168
+        "latency_ms": 0.342
       },
       "quoin": {
         "scenario_id": "SCEN_080",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.744,
-        "added_overhead_ms": 0.577
+        "latency_ms": 1.419,
+        "added_overhead_ms": 1.077
       }
     },
     {
@@ -1382,14 +1382,14 @@
         "scenario_id": "SCEN_081",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.183
+        "latency_ms": 0.347
       },
       "quoin": {
         "scenario_id": "SCEN_081",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.801,
-        "added_overhead_ms": 0.618
+        "latency_ms": 1.46,
+        "added_overhead_ms": 1.113
       }
     },
     {
@@ -1399,14 +1399,14 @@
         "scenario_id": "SCEN_082",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.203
+        "latency_ms": 0.33
       },
       "quoin": {
         "scenario_id": "SCEN_082",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.723,
-        "added_overhead_ms": 0.52
+        "latency_ms": 1.511,
+        "added_overhead_ms": 1.181
       }
     },
     {
@@ -1416,14 +1416,14 @@
         "scenario_id": "SCEN_083",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.178
+        "latency_ms": 0.336
       },
       "quoin": {
         "scenario_id": "SCEN_083",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.836,
-        "added_overhead_ms": 0.658
+        "latency_ms": 0.802,
+        "added_overhead_ms": 0.465
       }
     },
     {
@@ -1433,14 +1433,14 @@
         "scenario_id": "SCEN_084",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.218
+        "latency_ms": 0.159
       },
       "quoin": {
         "scenario_id": "SCEN_084",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.741,
-        "added_overhead_ms": 0.523
+        "latency_ms": 0.763,
+        "added_overhead_ms": 0.604
       }
     },
     {
@@ -1450,14 +1450,14 @@
         "scenario_id": "SCEN_085",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.229
+        "latency_ms": 0.177
       },
       "quoin": {
         "scenario_id": "SCEN_085",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 1.347,
-        "added_overhead_ms": 1.119
+        "latency_ms": 0.796,
+        "added_overhead_ms": 0.618
       }
     },
     {
@@ -1467,14 +1467,14 @@
         "scenario_id": "SCEN_086",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.372
+        "latency_ms": 0.175
       },
       "quoin": {
         "scenario_id": "SCEN_086",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.747,
-        "added_overhead_ms": 0.375
+        "latency_ms": 0.783,
+        "added_overhead_ms": 0.608
       }
     },
     {
@@ -1484,14 +1484,14 @@
         "scenario_id": "SCEN_087",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.183
+        "latency_ms": 0.15
       },
       "quoin": {
         "scenario_id": "SCEN_087",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 1.252,
-        "added_overhead_ms": 1.069
+        "latency_ms": 0.946,
+        "added_overhead_ms": 0.796
       }
     },
     {
@@ -1501,14 +1501,14 @@
         "scenario_id": "SCEN_088",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.304
+        "latency_ms": 0.183
       },
       "quoin": {
         "scenario_id": "SCEN_088",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.695,
-        "added_overhead_ms": 0.392
+        "latency_ms": 0.764,
+        "added_overhead_ms": 0.581
       }
     },
     {
@@ -1518,14 +1518,14 @@
         "scenario_id": "SCEN_089",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.166
+        "latency_ms": 0.173
       },
       "quoin": {
         "scenario_id": "SCEN_089",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.702,
-        "added_overhead_ms": 0.536
+        "latency_ms": 0.774,
+        "added_overhead_ms": 0.6
       }
     },
     {
@@ -1535,14 +1535,14 @@
         "scenario_id": "SCEN_090",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.189
+        "latency_ms": 0.16
       },
       "quoin": {
         "scenario_id": "SCEN_090",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.969,
-        "added_overhead_ms": 0.78
+        "latency_ms": 0.781,
+        "added_overhead_ms": 0.621
       }
     },
     {
@@ -1552,14 +1552,14 @@
         "scenario_id": "SCEN_091",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.187
+        "latency_ms": 0.157
       },
       "quoin": {
         "scenario_id": "SCEN_091",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.714,
-        "added_overhead_ms": 0.527
+        "latency_ms": 0.936,
+        "added_overhead_ms": 0.779
       }
     },
     {
@@ -1569,14 +1569,14 @@
         "scenario_id": "SCEN_092",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.168
+        "latency_ms": 0.183
       },
       "quoin": {
         "scenario_id": "SCEN_092",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.742,
-        "added_overhead_ms": 0.574
+        "latency_ms": 0.986,
+        "added_overhead_ms": 0.803
       }
     },
     {
@@ -1586,14 +1586,14 @@
         "scenario_id": "SCEN_093",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.172
+        "latency_ms": 0.158
       },
       "quoin": {
         "scenario_id": "SCEN_093",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.831,
-        "added_overhead_ms": 0.659
+        "latency_ms": 0.657,
+        "added_overhead_ms": 0.499
       }
     },
     {
@@ -1603,14 +1603,14 @@
         "scenario_id": "SCEN_094",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.179
+        "latency_ms": 0.134
       },
       "quoin": {
         "scenario_id": "SCEN_094",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.724,
-        "added_overhead_ms": 0.546
+        "latency_ms": 0.761,
+        "added_overhead_ms": 0.627
       }
     },
     {
@@ -1620,14 +1620,14 @@
         "scenario_id": "SCEN_095",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.172
+        "latency_ms": 0.143
       },
       "quoin": {
         "scenario_id": "SCEN_095",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.838,
-        "added_overhead_ms": 0.666
+        "latency_ms": 0.676,
+        "added_overhead_ms": 0.533
       }
     },
     {
@@ -1637,14 +1637,14 @@
         "scenario_id": "SCEN_096",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.186
+        "latency_ms": 0.143
       },
       "quoin": {
         "scenario_id": "SCEN_096",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.724,
-        "added_overhead_ms": 0.538
+        "latency_ms": 0.707,
+        "added_overhead_ms": 0.564
       }
     },
     {
@@ -1654,14 +1654,14 @@
         "scenario_id": "SCEN_097",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.172
+        "latency_ms": 0.175
       },
       "quoin": {
         "scenario_id": "SCEN_097",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.775,
-        "added_overhead_ms": 0.604
+        "latency_ms": 1.021,
+        "added_overhead_ms": 0.846
       }
     },
     {
@@ -1671,14 +1671,14 @@
         "scenario_id": "SCEN_098",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.357
+        "latency_ms": 0.243
       },
       "quoin": {
         "scenario_id": "SCEN_098",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.819,
-        "added_overhead_ms": 0.462
+        "latency_ms": 0.69,
+        "added_overhead_ms": 0.446
       }
     },
     {
@@ -1688,14 +1688,14 @@
         "scenario_id": "SCEN_099",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.207
+        "latency_ms": 0.147
       },
       "quoin": {
         "scenario_id": "SCEN_099",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 0.691,
-        "added_overhead_ms": 0.484
+        "latency_ms": 0.682,
+        "added_overhead_ms": 0.535
       }
     },
     {
@@ -1705,14 +1705,14 @@
         "scenario_id": "SCEN_100",
         "status": "COMMITTED",
         "stale_execution_committed": true,
-        "latency_ms": 0.17
+        "latency_ms": 0.149
       },
       "quoin": {
         "scenario_id": "SCEN_100",
         "status": "ABORTED_STALE_GENERATION",
         "stale_execution_committed": false,
-        "latency_ms": 1.447,
-        "added_overhead_ms": 1.278
+        "latency_ms": 1.237,
+        "added_overhead_ms": 1.088
       }
     }
   ]

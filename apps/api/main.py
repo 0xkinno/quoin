@@ -48,15 +48,20 @@ def root():
 
 @app.get("/api/health")
 def health():
+    from .state import app_state
     uptime = round(time.time() - START_TIME, 2)
-    use_dynamo = bool(env_cfg.get("DYNAMODB_TABLE_NAME") and env_cfg.get("AWS_ACCESS_KEY_ID"))
+    mem_status = app_state.memory.status()
+    auth_status = app_state.authority_ledger.status()
     return {
         "status": "HEALTHY",
         "service": "quoin-backend",
         "version": "1.0.0",
         "uptime_seconds": uptime,
-        "authority_ledger": "dynamodb" if use_dynamo else "sqlite_wal_durable",
-        "memory_source": "local_simulator",
+        "authority_ledger": auth_status["active_storage"],
+        "authority_table": auth_status["table_name"],
+        "memory_source": mem_status["source"],
+        "memory_mode": mem_status["mode"],
+        "memory_id": mem_status["memory_id"],
         "planes_active": [
             "Plane A: Strands Reasoning Agent (Amazon Bedrock Nova Lite)",
             "Plane B: Deterministic Kernel Fence & Read-After-Write CAS Gate",

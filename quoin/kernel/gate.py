@@ -17,8 +17,13 @@ from .hasher import CanonicalHasher
 class TwoPhaseCommitGate:
     """Compare-and-swap authority gate executing side effects only under valid generation bindings."""
 
-    def __init__(self, authority_reader: Optional[Callable[[], AuthoritySnapshot]] = None):
+    def __init__(
+        self,
+        authority_reader: Optional[Callable[[], AuthoritySnapshot]] = None,
+        authority_ledger: Optional[Any] = None,
+    ):
         self.authority_reader = authority_reader
+        self.authority_ledger = authority_ledger
         self.invalidated_receipts: set[str] = set()
 
     def evaluate_commit(
@@ -172,6 +177,16 @@ class TwoPhaseCommitGate:
         )
 
         permit_id = CanonicalHasher.compute_permit_id(receipt_id, current_effect_hash)
+
+        # Check atomic ledger for single-use permit consumption
+        if self.authority_ledger and self.authority_ledger.is_permit_consumed(permit_id):
+            return CommitResult(
+                committed=False,
+                status="ABORTED_PERMIT_REPLAY",
+                error=f"Execution permit {permit_id} has already been consumed.",
+                audit_trail={"permit_id": permit_id, "aborted_at": now.isoformat()},
+            )
+
         signature = CanonicalHasher.sign_permit(permit_id, receipt_id, current_effect_hash, snapshot.generation)
 
         permit = ExecutionPermit(
@@ -188,6 +203,14 @@ class TwoPhaseCommitGate:
         # 9. Execute Idempotent Effect (Plane D)
         try:
             effect_result = effect_executor(permit)
+            if self.authority_ledger:
+                self.authority_ledger.consume_permit_atomic(
+                    permit_id=permit_id,
+                    request_id=receipt.request_id,
+                    epoch=snapshot.generation,
+                    policy_hash=receipt.policy_hash,
+                    effect_hash=current_effect_hash,
+                )
             return CommitResult(
                 committed=True,
                 status="COMMITTED",

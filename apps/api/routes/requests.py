@@ -32,7 +32,7 @@ def evaluate_request(payload: Dict[str, Any]):
     proposal = app_state.agent.process_request(req_dict)
 
     # 2. Kernel Generation Fence evaluates proposal
-    snapshot = app_state.memory.get_active_snapshot(tenant_id)
+    snapshot = app_state.get_active_snapshot(tenant_id)
     if not snapshot:
         raise HTTPException(status_code=404, detail="No active policy snapshot available")
 

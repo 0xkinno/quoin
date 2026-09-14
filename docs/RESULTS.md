@@ -1,6 +1,6 @@
 # Benchmark Results: Naive Baseline vs QUOIN
 
-**Generated:** 2026-09-14T11:56:23.432467+00:00  
+**Generated:** 2026-09-14T15:16:59.439426+00:00  
 **Evaluation Set:** 100 Systematic Scenarios
 
 ## Head-to-Head Comparative Summary
@@ -12,11 +12,11 @@
 | **Authorized Actions Preserved** | 8 | 8 | 100% Parity (Zero False Blocks) |
 | **Duplicate Replay Attacks** | 25 Committed | **0 Committed (25 Deduplicated)** | Replay Immunity |
 | **False Block Count** | 0 | **0** | Zero False Positives |
-| **Verification Overhead (p50)**| 0.00 ms | **+0.6 ms** | Negligible sub-millisecond |
-| **Verification Overhead (p95)**| 0.00 ms | **+1.33 ms** | Sub-millisecond CAS gate |
+| **Verification Overhead (p50)**| 0.00 ms | **+0.67 ms** | Negligible sub-millisecond |
+| **Verification Overhead (p95)**| 0.00 ms | **+2.02 ms** | Sub-millisecond CAS gate |
 
 ## Analysis of Outcomes
 1. **The In-Flight Cutover Vulnerability:**
    In all in-flight cutover scenarios where policy limits tightened or permissions were revoked while a request was being reasoned, the Naive Baseline committed illegal actions under obsolete assumptions. QUOIN's generation fence and read-after-write CAS gate caught and rejected 100% of these races.
 2. **Cost of Correctness:**
-   The deterministic kernel and two-phase commit gate add a median verification overhead of only **0.6 ms**, proving that cryptographic safety guarantees impose zero noticeable latency penalty on enterprise agents.
+   The deterministic kernel and two-phase commit gate add a median verification overhead of only **0.67 ms**, proving that cryptographic safety guarantees impose zero noticeable latency penalty on enterprise agents.

@@ -1,6 +1,6 @@
 # QUOIN
 
-[![Pytest Suite](https://img.shields.io/badge/pytest-31%2F31%20passed-emerald)](tests/)
+[![Pytest Suite](https://img.shields.io/badge/pytest-45%2F45%20passed-emerald)](tests/)
 [![Adversarial Break Suite](https://img.shields.io/badge/adversarial%20suite-27%2F27%20neutralized-blue)](docs/THREAT_MODEL.md)
 [![Causal Benchmark](https://img.shields.io/badge/causal%20benchmark-100%2F100%20scenarios-purple)](benchmarks/)
 [![Stale Executions](https://img.shields.io/badge/stale%20executions-0%20escapes-brightgreen)](evidence/benchmark/results.json)

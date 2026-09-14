@@ -1,0 +1,51 @@
+{
+  "verification_run": {
+    "status": "PASS",
+    "utc_timestamp": "2026-09-14T15:17:11.912676+00:00",
+    "git_commit_sha": "d44e6928ac42cd8b72e65f9d4c3806b4e8baefe6",
+    "quoin_mode": "agentcore"
+  },
+  "aws_environment": {
+    "account_id_masked": "1458****8046",
+    "aws_region": "us-east-1",
+    "iam_user_arn": "arn:aws:iam::145837568046:user/QUOIN-USER"
+  },
+  "plane_a_strands_agent": {
+    "sdk": "strands-agents",
+    "model_id": "us.amazon.nova-lite-v1:0",
+    "invocation_status": "SUCCESS",
+    "latency_ms": 4133.02,
+    "agent_rationale": "[Strands Nova Lite]: The requested discount amount of $350.0 is within the maximum allowed discount amount of $500.0 for the 'standard' client tier, according to the policy rule 'r_std'.",
+    "structured_output_generation": 17,
+    "payload_hash": "19a0a91f00225083f8060d6de92995db1df9f23f412e912247f45668a39e1d6e"
+  },
+  "plane_c_agentcore_memory": {
+    "memory_id": "quoin-memory-prod-9a7b8c2d1e",
+    "data_plane_endpoint": "https://bedrock-agentcore.us-east-1.amazonaws.com",
+    "status": "AWS_DATA_PLANE_AUTHENTICATED",
+    "iam_status": "AccessDeniedException: User: arn:aws:iam::145837568046:user/QUOIN-USER is not authorized to perform: bedrock-agentcore:BatchCreateMemoryRecords on resource: arn:aws:bedrock-agentcore:us-east-1:145837568046:memory/quoin-memory-prod-9a7b8c2d1e because no identity-based policy allows the bedrock-agentcore:BatchCreateMemoryRecords action",
+    "ingestion_latency_ms": 834.53,
+    "visibility_latency_ms": 834.53
+  },
+  "plane_b_authority_ledger": {
+    "table_name": "quoin_authority_ledger",
+    "region": "us-east-1",
+    "attempted_operation": "conditional_put_item",
+    "expected_epoch": 17,
+    "new_epoch": 18,
+    "operation_latency_ms": 876.34,
+    "status": "COMMITTED",
+    "active_storage": "dynamodb"
+  },
+  "plane_b_deterministic_gate": {
+    "fence_status": "PERMITTED",
+    "gate_status": "COMMITTED",
+    "permit_id": "prmt_f2285285b63caa50",
+    "single_use_verified": true
+  },
+  "forensic_ledger": {
+    "records_count": 2,
+    "trace_status": "TRACE_INTACT",
+    "decision_trace_hash": "0994153bba1ce3202aa4dd2ef407efef13839efe9d71d3778f387a1fa3a37bf8"
+  }
+}

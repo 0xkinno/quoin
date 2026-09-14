@@ -69,11 +69,12 @@ class DecisionTraceLedger:
                 prev_hash = GENESIS_HASH
 
             now_iso = datetime.now(timezone.utc).isoformat()
+            canonical_payload_data = json.loads(json.dumps(CanonicalHasher._to_canonical_dict(event_data), default=str))
             payload = {
                 "request_id": request_id,
                 "sequence_index": seq_idx,
                 "event_type": event_type,
-                "payload": event_data,
+                "payload": canonical_payload_data,
                 "timestamp": now_iso,
             }
             curr_hash = self.compute_step_hash(prev_hash, payload)
@@ -82,7 +83,7 @@ class DecisionTraceLedger:
                 """INSERT INTO decision_events 
                    (request_id, sequence_index, event_type, event_data_json, previous_hash, current_hash, timestamp) 
                    VALUES (?, ?, ?, ?, ?, ?, ?)""",
-                (request_id, seq_idx, event_type, json.dumps(payload), prev_hash, curr_hash, now_iso)
+                (request_id, seq_idx, event_type, json.dumps(payload, default=str), prev_hash, curr_hash, now_iso)
             )
             conn.commit()
 
