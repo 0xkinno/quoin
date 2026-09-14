@@ -24,9 +24,9 @@
 
 | Resource | Link | Description |
 | :--- | :--- | :--- |
-| **Interactive Web Application** | [quoin.vercel.app](https://quoin.vercel.app) *(Deployment pending)* | Next.js 14 editorial web application with Replay design aesthetic, scrub timeline, and operator console |
+| **Interactive Web Application** | [quoin-six.vercel.app](https://quoin-six.vercel.app) *(Live Production)* | Next.js 14 editorial web application with Replay design aesthetic, scrub timeline, and operator console |
 | **Video Demonstration** | [YouTube Walkthrough](https://www.youtube.com/watch?v=placeholder) | Complete end-to-end technical walkthrough and live failure demonstration |
-| **FastAPI Backend Service** | [quoin-api.onrender.com](https://quoin-api.onrender.com) *(Deployment pending)* | Pure Python deterministic authority fence, DynamoDB CAS cutover gate, and Bedrock Nova Lite bridge |
+| **FastAPI Backend Service** | [quoin-api.onrender.com](https://quoin-api.onrender.com) *(Live Production)* | Pure Python deterministic authority fence, DynamoDB CAS cutover gate, and Bedrock Nova Lite bridge ([Health API](https://quoin-api.onrender.com/api/health), [Swagger UI](https://quoin-api.onrender.com/docs)) |
 | **GitHub Repository** | [github.com/0xkinno/quoin](https://github.com/0xkinno/quoin) | Primary open-source codebase, test suites, and empirical evidence manifests |
 
 ---
