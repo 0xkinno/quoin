@@ -6,11 +6,11 @@
 **Proof by Contradiction:**
 1. Assume an action evaluated under $G_a$ executes while active authority is $G_b$ ($G_b > G_a$).
 2. By the Two-Phase Commit Gate specification, an action commits only if an `ExecutionPermit` is issued by the kernel.
-3. The kernel issues an `ExecutionPermit` if and only if $\mathcal{R}.\text{policy\_generation} = G_{\text{readback}}$.
+3. The kernel issues an `ExecutionPermit` if and only if $\mathcal{R}.G_{\text{policy}} = G_{\text{readback}}$.
 4. In Phase 2, $G_{\text{readback}}$ is retrieved directly from the memory reader immediately before commit.
 5. Since active authority is $G_b$, $G_{\text{readback}} = G_b$.
-6. The receipt was generated under $G_a$, therefore $\mathcal{R}.\text{policy\_generation} = G_a$.
-7. Since $G_b > G_a$, $\mathcal{R}.\text{policy\_generation} \neq G_{\text{readback}}$.
+6. The receipt was generated under $G_a$, therefore $\mathcal{R}.G_{\text{policy}} = G_a$.
+7. Since $G_b > G_a$, $\mathcal{R}.G_{\text{policy}} \neq G_{\text{readback}}$.
 8. Therefore, the equality predicate fails, the receipt is permanently invalidated, and `CommitResult.committed` evaluates to `false`.
 9. This contradicts step 1. Thus, no action evaluated under $G_a$ can execute under $G_b$. $\blacksquare$
 

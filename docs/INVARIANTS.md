@@ -21,12 +21,12 @@ Execution is permitted if and only if all eight conditions hold:
 
 $$\text{EXECUTE}(E) \iff \begin{cases}
 1. & \mathcal{R}.\text{valid} = \text{true} \\
-2. & \mathcal{R}.\text{policy\_generation} = G_{\text{active}} \\
-3. & \mathcal{R}.\text{policy\_hash} = \mathcal{H}(P_{\text{active}}) \\
-4. & \mathcal{R}.\text{request\_hash} = \mathcal{H}(R) \\
-5. & \mathcal{R}.\text{proposal\_hash} = \mathcal{H}(\text{Prop}) \\
-6. & \mathcal{R}.\text{effect\_hash} = \mathcal{H}(E) \\
-7. & t_{\text{now}} < \mathcal{R}.\text{expires\_at} \\
+2. & \mathcal{R}.G_{\text{policy}} = G_{\text{active}} \\
+3. & \mathcal{R}.H_{\text{policy}} = \mathcal{H}(P_{\text{active}}) \\
+4. & \mathcal{R}.H_{\text{request}} = \mathcal{H}(R) \\
+5. & \mathcal{R}.H_{\text{proposal}} = \mathcal{H}(\text{Prop}) \\
+6. & \mathcal{R}.H_{\text{effect}} = \mathcal{H}(E) \\
+7. & t_{\text{now}} < \mathcal{R}.t_{\text{expires}} \\
 8. & \text{Readback}(P_{\text{active}}) \equiv P_{\text{active}}
 \end{cases}$$
 

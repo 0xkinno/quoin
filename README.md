@@ -319,7 +319,7 @@ Every operational request processed by QUOIN generates an immutable, tamper-evid
 - `parent_hash`: SHA-256 digest of the preceding event in the chain.
 - `event_hash`: Merkle link computed as:
 
-$$\text{EventHash} = \text{SHA256}(\text{parent\_hash} \parallel \text{step\_index} \parallel \text{event\_type} \parallel \text{payload\_hash} \parallel \text{timestamp})$$
+$$\text{EventHash} = \text{SHA256}(H_{\text{parent}} \parallel \text{step} \parallel \text{type} \parallel H_{\text{payload}} \parallel \text{timestamp})$$
 
 Any manual alteration of timestamps, policy generations, or executed amounts breaks the Merkle link and invalidates the entire trace chain.
 
