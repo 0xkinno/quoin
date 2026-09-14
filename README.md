@@ -12,7 +12,7 @@
 ---
 
 <p align="center">
-  <img src="docs/assets/quoin-banner.png" alt="QUOIN Platform Banner" width="820" />
+  <img src="docs/assets/quoin-banner.png" alt="QUOIN Platform Banner" width="100%" />
 </p>
 
 > **Accepted is not the same as visible.**  
