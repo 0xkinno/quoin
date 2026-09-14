@@ -1,0 +1,21 @@
+{
+  "sts": {
+    "status": "PASS",
+    "arn": "arn:aws:iam::145837568046:user/QUOIN-USER",
+    "account": "145837568046"
+  },
+  "region": {
+    "status": "PASS (Bedrock scoped)",
+    "region": "us-east-1"
+  },
+  "model": {
+    "status": "PASS",
+    "model_id": "us.amazon.nova-lite-v1:0",
+    "response": "QUOIN_READY"
+  },
+  "agentcore": {
+    "status": "TESTED",
+    "detail": "An error occurred (AccessDeniedException) when calling the ListAgents operation: User: arn:aws:iam::145837568046:user/QUOIN-USER is not authorized to perform: bedrock:ListAgents on resource: arn:aws:bedrock:us-east-1:145837568046:agent/* with an explicit deny in a service control policy: arn:aws:organizations::675474619693:policy/o-gdohsjofpa/service_control_policy/p-r7wg1hfu"
+  },
+  "memory_methods": []
+}

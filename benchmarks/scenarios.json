@@ -1,0 +1,169 @@
+[
+  {
+    "scenario_id": "SCEN_01",
+    "description": "Standard within-limits discount under G17",
+    "request": {"request_id": "req_01", "client_id": "c1", "client_tier": "standard", "amount": 350.0, "invoice_id": "inv_01"},
+    "initial_generation": 17,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "ALLOW"
+  },
+  {
+    "scenario_id": "SCEN_02",
+    "description": "Gold tier discount valid under G17 ($1200 <= $1500), but cutover to G18 occurs in-flight tightening limit to $1000",
+    "request": {"request_id": "req_02", "client_id": "c2", "client_tier": "gold", "amount": 1200.0, "invoice_id": "inv_02"},
+    "initial_generation": 17,
+    "cutover_to_generation": 18,
+    "cutover_limit": 1000.0,
+    "expected_safe_outcome": "BLOCK_STALE_RACE"
+  },
+  {
+    "scenario_id": "SCEN_03",
+    "description": "Standard tier discount exceeding both G17 and G18 limits ($800 > $500)",
+    "request": {"request_id": "req_03", "client_id": "c3", "client_tier": "standard", "amount": 800.0, "invoice_id": "inv_03"},
+    "initial_generation": 17,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "BLOCK_POLICY_VIOLATION"
+  },
+  {
+    "scenario_id": "SCEN_04",
+    "description": "Silver tier service credit valid under G18 ($400 <= $500)",
+    "request": {"request_id": "req_04", "client_id": "c4", "client_tier": "silver", "amount": 400.0, "action": "issue_service_credit", "reason": "SLA delay"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "ALLOW"
+  },
+  {
+    "scenario_id": "SCEN_05",
+    "description": "In-flight cutover race during proposal commit for standard discount",
+    "request": {"request_id": "req_05", "client_id": "c5", "client_tier": "standard", "amount": 450.0, "invoice_id": "inv_05"},
+    "initial_generation": 18,
+    "cutover_to_generation": 19,
+    "cutover_limit": 300.0,
+    "expected_safe_outcome": "BLOCK_STALE_RACE"
+  },
+  {
+    "scenario_id": "SCEN_06",
+    "description": "Duplicate replay of previously executed permit",
+    "request": {"request_id": "req_06", "client_id": "c6", "client_tier": "standard", "amount": 200.0, "invoice_id": "inv_06"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "simulate_replay": true,
+    "expected_safe_outcome": "DEDUPLICATE"
+  },
+  {
+    "scenario_id": "SCEN_07",
+    "description": "Executive escalation required under G18 (Platinum tier discount $2500)",
+    "request": {"request_id": "req_07", "client_id": "c7", "client_tier": "platinum", "amount": 2500.0, "invoice_id": "inv_07"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "BLOCK_ESCALATION"
+  },
+  {
+    "scenario_id": "SCEN_08",
+    "description": "Gold tier discount valid under G18 ($750 <= $1000)",
+    "request": {"request_id": "req_08", "client_id": "c8", "client_tier": "gold", "amount": 750.0, "invoice_id": "inv_08"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "ALLOW"
+  },
+  {
+    "scenario_id": "SCEN_09",
+    "description": "In-flight policy cutover race: G18 to G19 cuts discount ceiling from $1000 to $600",
+    "request": {"request_id": "req_09", "client_id": "c9", "client_tier": "gold", "amount": 900.0, "invoice_id": "inv_09"},
+    "initial_generation": 18,
+    "cutover_to_generation": 19,
+    "cutover_limit": 600.0,
+    "expected_safe_outcome": "BLOCK_STALE_RACE"
+  },
+  {
+    "scenario_id": "SCEN_10",
+    "description": "Service credit dispute exceeding ceiling ($2500 > $500)",
+    "request": {"request_id": "req_10", "client_id": "c10", "client_tier": "gold", "amount": 2500.0, "action": "issue_service_credit", "reason": "Dissatisfaction"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "BLOCK_POLICY_VIOLATION"
+  },
+  {
+    "scenario_id": "SCEN_11",
+    "description": "Standard tier within-limits discount under G18 ($250 <= $500)",
+    "request": {"request_id": "req_11", "client_id": "c11", "client_tier": "standard", "amount": 250.0, "invoice_id": "inv_11"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "ALLOW"
+  },
+  {
+    "scenario_id": "SCEN_12",
+    "description": "Policy rollback simulation: G20 restores G18 limits, but in-flight request was evaluated under G19",
+    "request": {"request_id": "req_12", "client_id": "c12", "client_tier": "standard", "amount": 400.0, "invoice_id": "inv_12"},
+    "initial_generation": 19,
+    "cutover_to_generation": 20,
+    "expected_safe_outcome": "BLOCK_STALE_RACE"
+  },
+  {
+    "scenario_id": "SCEN_13",
+    "description": "Standard within-limits discount under G18 ($150 <= $500)",
+    "request": {"request_id": "req_13", "client_id": "c13", "client_tier": "standard", "amount": 150.0, "invoice_id": "inv_13"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "ALLOW"
+  },
+  {
+    "scenario_id": "SCEN_14",
+    "description": "In-flight race condition: G18 to G19 standard discount limit reduced to $200 while $400 request in flight",
+    "request": {"request_id": "req_14", "client_id": "c14", "client_tier": "standard", "amount": 400.0, "invoice_id": "inv_14"},
+    "initial_generation": 18,
+    "cutover_to_generation": 19,
+    "cutover_limit": 200.0,
+    "expected_safe_outcome": "BLOCK_STALE_RACE"
+  },
+  {
+    "scenario_id": "SCEN_15",
+    "description": "Credit request within limits under G18 ($300 <= $500)",
+    "request": {"request_id": "req_15", "client_id": "c15", "client_tier": "standard", "amount": 300.0, "action": "issue_service_credit", "reason": "Billing adjustment"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "ALLOW"
+  },
+  {
+    "scenario_id": "SCEN_16",
+    "description": "Replay attempt of standard discount",
+    "request": {"request_id": "req_16", "client_id": "c16", "client_tier": "standard", "amount": 180.0, "invoice_id": "inv_16"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "simulate_replay": true,
+    "expected_safe_outcome": "DEDUPLICATE"
+  },
+  {
+    "scenario_id": "SCEN_17",
+    "description": "Gold discount within limits under G18 ($950 <= $1000)",
+    "request": {"request_id": "req_17", "client_id": "c17", "client_tier": "gold", "amount": 950.0, "invoice_id": "inv_17"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "ALLOW"
+  },
+  {
+    "scenario_id": "SCEN_18",
+    "description": "In-flight cutover race: G18 to G19 gold limit reduced from $1000 to $500 while $850 request in flight",
+    "request": {"request_id": "req_18", "client_id": "c18", "client_tier": "gold", "amount": 850.0, "invoice_id": "inv_18"},
+    "initial_generation": 18,
+    "cutover_to_generation": 19,
+    "cutover_limit": 500.0,
+    "expected_safe_outcome": "BLOCK_STALE_RACE"
+  },
+  {
+    "scenario_id": "SCEN_19",
+    "description": "Excessive discount request for silver tier ($900 > $600)",
+    "request": {"request_id": "req_19", "client_id": "c19", "client_tier": "silver", "amount": 900.0, "invoice_id": "inv_19"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "BLOCK_POLICY_VIOLATION"
+  },
+  {
+    "scenario_id": "SCEN_20",
+    "description": "Standard discount within limits under G18 ($220 <= $500)",
+    "request": {"request_id": "req_20", "client_id": "c20", "client_tier": "standard", "amount": 220.0, "invoice_id": "inv_20"},
+    "initial_generation": 18,
+    "cutover_to_generation": null,
+    "expected_safe_outcome": "ALLOW"
+  }
+]

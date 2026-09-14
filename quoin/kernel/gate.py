@@ -1,0 +1,156 @@
+"""Two-Phase Commit Gate (Plane B).
+
+Enforces read-after-write re-verification and issues execution permits immediately before effect execution.
+"""
+
+from datetime import datetime, timezone
+from typing import Any, Dict, Optional, Callable
+from .models import (
+    AuthorityReceipt,
+    ExecutionPermit,
+    CommitResult,
+    AuthoritySnapshot,
+    DecisionProposal,
+)
+from .hasher import CanonicalHasher
+
+class TwoPhaseCommitGate:
+    """Compare-and-swap authority gate executing side effects only under valid generation bindings."""
+
+    def __init__(self, authority_reader: Callable[[], AuthoritySnapshot]):
+        self.authority_reader = authority_reader
+        self.invalidated_receipts: set[str] = set()
+
+    def commit(
+        self,
+        receipt: AuthorityReceipt,
+        current_request_data: Dict[str, Any],
+        current_proposal: DecisionProposal,
+        intended_effect: Dict[str, Any],
+        effect_executor: Callable[[ExecutionPermit], Dict[str, Any]],
+    ) -> CommitResult:
+        """Execute Phase 2 of Two-Phase Authority."""
+        now = datetime.now(timezone.utc)
+        receipt_id = receipt.receipt_id
+
+        # 0. Check receipt cancellation
+        if not receipt.valid or receipt_id in self.invalidated_receipts:
+            return CommitResult(
+                committed=False,
+                status="ABORTED_INVALID_RECEIPT",
+                error=f"Receipt {receipt_id} has been invalidated or cancelled.",
+                audit_trail={"receipt_id": receipt_id, "aborted_at": now.isoformat()},
+            )
+
+        # 1. Expiration check
+        if now > receipt.expires_at:
+            self.invalidated_receipts.add(receipt_id)
+            return CommitResult(
+                committed=False,
+                status="ABORTED_EXPIRED",
+                error=f"Receipt {receipt_id} expired at {receipt.expires_at.isoformat()} (Current: {now.isoformat()}).",
+                audit_trail={"receipt_id": receipt_id, "expired_at": receipt.expires_at.isoformat()},
+            )
+
+        # 2. Phase 2 Read-After-Write: Re-read current active authority from memory
+        current_snapshot = self.authority_reader()
+
+        # 3. Generation Match Check (The Core Fence)
+        if receipt.policy_generation != current_snapshot.generation:
+            self.invalidated_receipts.add(receipt_id)
+            return CommitResult(
+                committed=False,
+                status="ABORTED_STALE_GENERATION",
+                error=(
+                    f"Generation Race Detected: Receipt bound to G{receipt.policy_generation}, "
+                    f"but active visible authority advanced to G{current_snapshot.generation}. Aborting commit."
+                ),
+                audit_trail={
+                    "receipt_generation": receipt.policy_generation,
+                    "active_generation": current_snapshot.generation,
+                    "aborted_at": now.isoformat(),
+                },
+            )
+
+        # 4. Policy Hash Check
+        if receipt.policy_hash != current_snapshot.retrieved_record_hash:
+            self.invalidated_receipts.add(receipt_id)
+            return CommitResult(
+                committed=False,
+                status="ABORTED_POLICY_HASH_MISMATCH",
+                error="Active policy digest differs from authority receipt policy digest.",
+                audit_trail={"receipt_hash": receipt.policy_hash, "active_hash": current_snapshot.retrieved_record_hash},
+            )
+
+        # 5. Request Mutation / Tamper Check
+        current_req_hash = CanonicalHasher.compute_request_hash(current_request_data)
+        if receipt.request_hash != current_req_hash:
+            self.invalidated_receipts.add(receipt_id)
+            return CommitResult(
+                committed=False,
+                status="ABORTED_TAMPER_REQUEST",
+                error="Request payload was mutated after authority receipt issuance.",
+                audit_trail={"receipt_req_hash": receipt.request_hash, "current_req_hash": current_req_hash},
+            )
+
+        # 6. Proposal Mutation / Tamper Check
+        current_prop_hash = CanonicalHasher.compute_proposal_hash(current_proposal)
+        if receipt.proposal_hash != current_prop_hash:
+            self.invalidated_receipts.add(receipt_id)
+            return CommitResult(
+                committed=False,
+                status="ABORTED_TAMPER_PROPOSAL",
+                error="Decision proposal was mutated after authority receipt issuance.",
+                audit_trail={"receipt_prop_hash": receipt.proposal_hash, "current_prop_hash": current_prop_hash},
+            )
+
+        # 7. Intended Effect Hash Check
+        current_effect_hash = CanonicalHasher.compute_effect_hash(
+            intended_effect["action"],
+            intended_effect.get("parameters", {}),
+        )
+        if receipt.effect_hash != current_effect_hash:
+            self.invalidated_receipts.add(receipt_id)
+            return CommitResult(
+                committed=False,
+                status="ABORTED_TAMPER_EFFECT",
+                error="Intended effect does not match receipt effect digest.",
+                audit_trail={"receipt_effect_hash": receipt.effect_hash, "current_effect_hash": current_effect_hash},
+            )
+
+        # 8. All Predicates Satisfied: Issue Cryptographic Execution Permit
+        permit_id = CanonicalHasher.compute_permit_id(receipt_id, current_effect_hash)
+        signature = CanonicalHasher.sign_permit(permit_id, receipt_id, current_effect_hash, current_snapshot.generation)
+
+        permit = ExecutionPermit(
+            permit_id=permit_id,
+            receipt_id=receipt_id,
+            request_id=receipt.request_id,
+            policy_generation=current_snapshot.generation,
+            effect_hash=current_effect_hash,
+            issued_at=now,
+            expires_at=receipt.expires_at,
+            kernel_signature=signature,
+        )
+
+        # 9. Execute Idempotent Effect (Plane D)
+        try:
+            effect_result = effect_executor(permit)
+            return CommitResult(
+                committed=True,
+                status="COMMITTED",
+                permit=permit,
+                effect_result=effect_result,
+                audit_trail={
+                    "permit_id": permit_id,
+                    "generation": current_snapshot.generation,
+                    "committed_at": now.isoformat(),
+                },
+            )
+        except Exception as e:
+            return CommitResult(
+                committed=False,
+                status="EFFECT_EXECUTION_FAILURE",
+                error=f"Execution service failed: {str(e)}",
+                audit_trail={"permit_id": permit_id, "error": str(e)},
+            )

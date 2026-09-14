@@ -1,0 +1,38 @@
+{
+  "project": "QUOIN",
+  "version": "1.0.0",
+  "generated_at": "2026-09-14T07:13:37.435492+00:00",
+  "manifest_version": "1.0",
+  "artifacts": [
+    {
+      "path": "evidence/traces/attack_results.json",
+      "size_bytes": 4429,
+      "sha256": "24f3623590df47089e15cc5cf7365a03ca6b1c9b193248b27cc7d4247b62fb08"
+    },
+    {
+      "path": "evidence/benchmark/results.json",
+      "size_bytes": 11053,
+      "sha256": "054e914d4940a50b1e828b06bacbc60d44cc0e5f5c45d5bcade225199f78ef62"
+    },
+    {
+      "path": "docs/FINDING.md",
+      "size_bytes": 1760,
+      "sha256": "d9051b96a9e362f54aa27f57e78986766e953cd7a2add43fd11dbdb04ab1438c"
+    },
+    {
+      "path": "docs/RESULTS.md",
+      "size_bytes": 1338,
+      "sha256": "17303aff243bcb7ccacd918dbceb5edac28afff9725895b75a78db72de568cc4"
+    },
+    {
+      "path": "docs/THREAT_MODEL.md",
+      "size_bytes": 2401,
+      "sha256": "874c23f2059321bbbad7cde60e2fb65a841ae59d8808e9f15715be3731255206"
+    },
+    {
+      "path": "docs/PROOF.md",
+      "size_bytes": 2640,
+      "sha256": "f5fe951aee6b49fbb5c1ebbfc2568cde2b5993e51aa5d8b7f72d3c27e4167a75"
+    }
+  ]
+}

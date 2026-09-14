@@ -1,0 +1,124 @@
+{
+  "timestamp": "2026-09-14T07:08:54.034584+00:00",
+  "total_attacks": 13,
+  "passed_count": 13,
+  "traces": [
+    {
+      "id": "ATT_A",
+      "name": "Accepted-but-not-visible",
+      "expected": "BLOCK",
+      "observed": "FENCE_BLOCKED",
+      "invariant": "Generation match",
+      "passed": true,
+      "details": "Policy Generation Mismatch: Proposal reasoned under G18, but active visible authority is G17. Action blocked by generation fence."
+    },
+    {
+      "id": "ATT_B",
+      "name": "Visible-but-stale-session",
+      "expected": "BLOCK OLD RECEIPT",
+      "observed": "ABORTED_STALE_GENERATION",
+      "invariant": "Read-after-write commit check",
+      "passed": true,
+      "details": "Generation Race Detected: Receipt bound to G17, but active visible authority advanced to G18. Aborting commit."
+    },
+    {
+      "id": "ATT_C",
+      "name": "Generation race",
+      "expected": "REJECT / RECOMPUTE",
+      "observed": "ABORTED_STALE_GENERATION",
+      "invariant": "CAS generation guard",
+      "passed": true,
+      "details": "Generation Race Detected: Receipt bound to G17, but active visible authority advanced to G18. Aborting commit."
+    },
+    {
+      "id": "ATT_D",
+      "name": "Policy rollback",
+      "expected": "BLOCK (Monotonic generation preserved)",
+      "observed": "ABORTED_STALE_GENERATION",
+      "invariant": "Generation strictly monotonic",
+      "passed": true,
+      "details": "Generation Race Detected: Receipt bound to G17, but active visible authority advanced to G19. Aborting commit."
+    },
+    {
+      "id": "ATT_E",
+      "name": "Hash tamper",
+      "expected": "BLOCK",
+      "observed": "ABORTED_POLICY_HASH_MISMATCH",
+      "invariant": "Cryptographic policy digest",
+      "passed": true,
+      "details": "Active policy digest differs from authority receipt policy digest."
+    },
+    {
+      "id": "ATT_F",
+      "name": "Request mutation",
+      "expected": "BLOCK",
+      "observed": "ABORTED_INVALID_RECEIPT",
+      "invariant": "Request payload hash binding",
+      "passed": true,
+      "details": "Receipt rcpt_b7dff46b87df51c0 has been invalidated or cancelled."
+    },
+    {
+      "id": "ATT_G",
+      "name": "Proposal mutation",
+      "expected": "BLOCK",
+      "observed": "ABORTED_INVALID_RECEIPT",
+      "invariant": "Proposal hash binding",
+      "passed": true,
+      "details": "Receipt rcpt_b7dff46b87df51c0 has been invalidated or cancelled."
+    },
+    {
+      "id": "ATT_H",
+      "name": "Namespace mix-up",
+      "expected": "BLOCK (Isolated None)",
+      "observed": "ISOLATED_NONE",
+      "invariant": "Tenant namespace segregation",
+      "passed": true,
+      "details": "Tenant B cannot query Tenant A namespace"
+    },
+    {
+      "id": "ATT_I",
+      "name": "Retry duplicate",
+      "expected": "DEDUPLICATED",
+      "observed": "DEDUPLICATED",
+      "invariant": "Idempotent permit replay ledger",
+      "passed": true,
+      "details": "Duplicate permit execution deduplicated"
+    },
+    {
+      "id": "ATT_J",
+      "name": "Interrupt / retry",
+      "expected": "SINGLE COMMIT ONLY",
+      "observed": "DEDUPLICATED",
+      "invariant": "Crash recovery deduplication",
+      "passed": true,
+      "details": "Simulated network drop retry safely deduplicated"
+    },
+    {
+      "id": "ATT_K",
+      "name": "Context truncation",
+      "expected": "BLOCK",
+      "observed": "FENCE_BLOCKED",
+      "invariant": "Zero-trust model context",
+      "passed": true,
+      "details": "Policy Generation Mismatch: Proposal reasoned under G0, but active visible authority is G18. Action blocked by generation fence."
+    },
+    {
+      "id": "ATT_L",
+      "name": "Stale-memory hallucination",
+      "expected": "BLOCK",
+      "observed": "FENCE_BLOCKED",
+      "invariant": "Cryptographic snapshot verification",
+      "passed": true,
+      "details": "Policy Generation Mismatch: Proposal reasoned under G20, but active visible authority is G18. Action blocked by generation fence."
+    },
+    {
+      "id": "ATT_M",
+      "name": "Tool-output poisoning",
+      "expected": "BLOCK",
+      "observed": "POLICY_INTEGRITY_TAMPER",
+      "invariant": "Content hash parity check",
+      "passed": true,
+      "details": "Authority snapshot hash mismatch: Record content differs from retrieved digest."
+    }
+  ]
+}

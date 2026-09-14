@@ -1,0 +1,359 @@
+{
+  "metadata": {
+    "campaign": "Controlled Causal Benchmark: Baseline vs QUOIN",
+    "timestamp": "2026-09-14T07:11:07.235235+00:00",
+    "total_scenarios": 20
+  },
+  "summary": {
+    "baseline_stale_policy_executions": 7,
+    "quoin_stale_policy_executions": 0,
+    "unsafe_effects_prevented": 7,
+    "authorized_effects_preserved": 8,
+    "duplicate_executions_prevented": 2,
+    "false_blocks": 0,
+    "verification_overhead_ms_p50": 0.53,
+    "verification_overhead_ms_p95": 1.07
+  },
+  "comparisons": [
+    {
+      "scenario_id": "SCEN_01",
+      "description": "Standard within-limits discount under G17",
+      "baseline": {
+        "scenario_id": "SCEN_01",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.009
+      },
+      "quoin": {
+        "scenario_id": "SCEN_01",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.625,
+        "added_overhead_ms": 0.616
+      }
+    },
+    {
+      "scenario_id": "SCEN_02",
+      "description": "Gold tier discount valid under G17 ($1200 <= $1500), but cutover to G18 occurs in-flight tightening limit to $1000",
+      "baseline": {
+        "scenario_id": "SCEN_02",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.146
+      },
+      "quoin": {
+        "scenario_id": "SCEN_02",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.58,
+        "added_overhead_ms": 0.434
+      }
+    },
+    {
+      "scenario_id": "SCEN_03",
+      "description": "Standard tier discount exceeding both G17 and G18 limits ($800 > $500)",
+      "baseline": {
+        "scenario_id": "SCEN_03",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.004
+      },
+      "quoin": {
+        "scenario_id": "SCEN_03",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.189,
+        "added_overhead_ms": 0.184
+      }
+    },
+    {
+      "scenario_id": "SCEN_04",
+      "description": "Silver tier service credit valid under G18 ($400 <= $500)",
+      "baseline": {
+        "scenario_id": "SCEN_04",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_04",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.619,
+        "added_overhead_ms": 0.614
+      }
+    },
+    {
+      "scenario_id": "SCEN_05",
+      "description": "In-flight cutover race during proposal commit for standard discount",
+      "baseline": {
+        "scenario_id": "SCEN_05",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.14
+      },
+      "quoin": {
+        "scenario_id": "SCEN_05",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.518,
+        "added_overhead_ms": 0.378
+      }
+    },
+    {
+      "scenario_id": "SCEN_06",
+      "description": "Duplicate replay of previously executed permit",
+      "baseline": {
+        "scenario_id": "SCEN_06",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.007
+      },
+      "quoin": {
+        "scenario_id": "SCEN_06",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.077,
+        "added_overhead_ms": 1.07
+      }
+    },
+    {
+      "scenario_id": "SCEN_07",
+      "description": "Executive escalation required under G18 (Platinum tier discount $2500)",
+      "baseline": {
+        "scenario_id": "SCEN_07",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_07",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.163,
+        "added_overhead_ms": 0.157
+      }
+    },
+    {
+      "scenario_id": "SCEN_08",
+      "description": "Gold tier discount valid under G18 ($750 <= $1000)",
+      "baseline": {
+        "scenario_id": "SCEN_08",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_08",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.531,
+        "added_overhead_ms": 0.526
+      }
+    },
+    {
+      "scenario_id": "SCEN_09",
+      "description": "In-flight policy cutover race: G18 to G19 cuts discount ceiling from $1000 to $600",
+      "baseline": {
+        "scenario_id": "SCEN_09",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.147
+      },
+      "quoin": {
+        "scenario_id": "SCEN_09",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.534,
+        "added_overhead_ms": 0.387
+      }
+    },
+    {
+      "scenario_id": "SCEN_10",
+      "description": "Service credit dispute exceeding ceiling ($2500 > $500)",
+      "baseline": {
+        "scenario_id": "SCEN_10",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.004
+      },
+      "quoin": {
+        "scenario_id": "SCEN_10",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.202,
+        "added_overhead_ms": 0.198
+      }
+    },
+    {
+      "scenario_id": "SCEN_11",
+      "description": "Standard tier within-limits discount under G18 ($250 <= $500)",
+      "baseline": {
+        "scenario_id": "SCEN_11",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_11",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.553,
+        "added_overhead_ms": 0.548
+      }
+    },
+    {
+      "scenario_id": "SCEN_12",
+      "description": "Policy rollback simulation: G20 restores G18 limits, but in-flight request was evaluated under G19",
+      "baseline": {
+        "scenario_id": "SCEN_12",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.146
+      },
+      "quoin": {
+        "scenario_id": "SCEN_12",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.163,
+        "added_overhead_ms": 0.017
+      }
+    },
+    {
+      "scenario_id": "SCEN_13",
+      "description": "Standard within-limits discount under G18 ($150 <= $500)",
+      "baseline": {
+        "scenario_id": "SCEN_13",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_13",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.038,
+        "added_overhead_ms": 1.033
+      }
+    },
+    {
+      "scenario_id": "SCEN_14",
+      "description": "In-flight race condition: G18 to G19 standard discount limit reduced to $200 while $400 request in flight",
+      "baseline": {
+        "scenario_id": "SCEN_14",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.154
+      },
+      "quoin": {
+        "scenario_id": "SCEN_14",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.695,
+        "added_overhead_ms": 0.542
+      }
+    },
+    {
+      "scenario_id": "SCEN_15",
+      "description": "Credit request within limits under G18 ($300 <= $500)",
+      "baseline": {
+        "scenario_id": "SCEN_15",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_15",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.596,
+        "added_overhead_ms": 0.591
+      }
+    },
+    {
+      "scenario_id": "SCEN_16",
+      "description": "Replay attempt of standard discount",
+      "baseline": {
+        "scenario_id": "SCEN_16",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_16",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.109,
+        "added_overhead_ms": 1.101
+      }
+    },
+    {
+      "scenario_id": "SCEN_17",
+      "description": "Gold discount within limits under G18 ($950 <= $1000)",
+      "baseline": {
+        "scenario_id": "SCEN_17",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_17",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.546,
+        "added_overhead_ms": 0.54
+      }
+    },
+    {
+      "scenario_id": "SCEN_18",
+      "description": "In-flight cutover race: G18 to G19 gold limit reduced from $1000 to $500 while $850 request in flight",
+      "baseline": {
+        "scenario_id": "SCEN_18",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.279
+      },
+      "quoin": {
+        "scenario_id": "SCEN_18",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.679,
+        "added_overhead_ms": 0.4
+      }
+    },
+    {
+      "scenario_id": "SCEN_19",
+      "description": "Excessive discount request for silver tier ($900 > $600)",
+      "baseline": {
+        "scenario_id": "SCEN_19",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_19",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.207,
+        "added_overhead_ms": 0.201
+      }
+    },
+    {
+      "scenario_id": "SCEN_20",
+      "description": "Standard discount within limits under G18 ($220 <= $500)",
+      "baseline": {
+        "scenario_id": "SCEN_20",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_20",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.769,
+        "added_overhead_ms": 0.764
+      }
+    }
+  ]
+}
