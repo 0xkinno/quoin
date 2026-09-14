@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
-  testDir: "../",
+  testDir: "./",
   timeout: 30000,
   expect: {
     timeout: 5000
@@ -15,6 +15,9 @@ export default defineConfig({
     baseURL: "http://localhost:3000",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
+    launchOptions: {
+      executablePath: "C:\\Users\\hp\\AppData\\Local\\ms-playwright\\chromium-1243\\chrome-win64\\chrome.exe",
+    },
   },
   projects: [
     {

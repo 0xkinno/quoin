@@ -65,9 +65,11 @@ class AgentCoreMemoryClient:
         return self.simulator.list_history(tenant_id)
 
     def status(self) -> Dict[str, Any]:
+        is_live = bool(self.mode == "agentcore" and self._boto_session and self.memory_id)
         return {
             "mode": self.mode,
             "region": self.region,
             "memory_id": self.memory_id or "local-simulated-memory-01",
+            "source": "agentcore_memory" if is_live else "local_simulator",
             "active": True,
         }

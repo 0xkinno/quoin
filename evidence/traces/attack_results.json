@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-09-14T07:08:54.034584+00:00",
-  "total_attacks": 13,
-  "passed_count": 13,
+  "timestamp": "2026-09-14T11:52:22.919675+00:00",
+  "total_attacks": 27,
+  "passed_count": 27,
   "traces": [
     {
       "id": "ATT_A",
@@ -119,6 +119,132 @@
       "invariant": "Content hash parity check",
       "passed": true,
       "details": "Authority snapshot hash mismatch: Record content differs from retrieved digest."
+    },
+    {
+      "id": "ATT_N",
+      "name": "Memory ACK before long-term visibility",
+      "expected": "BLOCK",
+      "observed": "NO_ACTIVE_POLICY",
+      "invariant": "Visibility snapshot presence",
+      "passed": true,
+      "details": "No active visible authority snapshot available for tenant. Action blocked by generation fence."
+    },
+    {
+      "id": "ATT_O",
+      "name": "Authority update after proposal before commit",
+      "expected": "BLOCK",
+      "observed": "ABORTED_STALE_GENERATION",
+      "invariant": "Two-phase atomic generation CAS",
+      "passed": true,
+      "details": "Generation Race Detected: Receipt bound to G18, but active visible authority advanced to G19. Aborting commit."
+    },
+    {
+      "id": "ATT_P",
+      "name": "Authority update during commit transaction",
+      "expected": "REJECT STALE EPOCH",
+      "observed": "CAS_EPOCH_MISMATCH",
+      "invariant": "Conditional write optimistic locking",
+      "passed": true,
+      "details": "CAS Epoch Mismatch: expected G17, found G18"
+    },
+    {
+      "id": "ATT_Q",
+      "name": "Duplicate commit with same idempotency key",
+      "expected": "DEDUPLICATED",
+      "observed": "CONSUMED_THEN_REJECTED",
+      "invariant": "Single-use permit consumption constraint",
+      "passed": true,
+      "details": "First consumption accepted, replay consumption rejected"
+    },
+    {
+      "id": "ATT_R",
+      "name": "Malicious rollback generation semantics",
+      "expected": "BLOCK ROLLBACK",
+      "observed": "MONOTONIC_REJECTED",
+      "invariant": "Monotonic generation increment validator",
+      "passed": true,
+      "details": "Generation rollback from G18 to G16 rejected"
+    },
+    {
+      "id": "ATT_S",
+      "name": "Memory record correct generation incorrect hash",
+      "expected": "BLOCK",
+      "observed": "ABORTED_POLICY_HASH_MISMATCH",
+      "invariant": "Cryptographic digest match",
+      "passed": true,
+      "details": "Active policy digest differs from authority receipt policy digest."
+    },
+    {
+      "id": "ATT_T",
+      "name": "DynamoDB authority hash correct memory context stale",
+      "expected": "BLOCK",
+      "observed": "FENCE_BLOCKED",
+      "invariant": "Cross-plane generation fence",
+      "passed": true,
+      "details": "Policy Generation Mismatch: Proposal reasoned under G18, but active visible authority is G17. Action blocked by generation fence."
+    },
+    {
+      "id": "ATT_U",
+      "name": "Cross-tenant namespace collision",
+      "expected": "BLOCK",
+      "observed": "ABORTED_CROSS_TENANT_MISMATCH",
+      "invariant": "Tenant policy ID binding",
+      "passed": true,
+      "details": "Cross-tenant policy ID mismatch: Receipt policy_id 'pol_tenant_a' != snapshot policy_id 'pol_tenant_b'."
+    },
+    {
+      "id": "ATT_V",
+      "name": "Expired receipt with valid hashes",
+      "expected": "BLOCK",
+      "observed": "ABORTED_EXPIRED_RECEIPT",
+      "invariant": "Temporal validity lease",
+      "passed": true,
+      "details": "Receipt rcpt_v expired at 2026-09-14T11:42:22.845730+00:00 (Current: 2026-09-14T11:52:22.900258+00:00)."
+    },
+    {
+      "id": "ATT_W",
+      "name": "Old receipt replay after newer generation",
+      "expected": "BLOCK",
+      "observed": "ABORTED_STALE_GENERATION",
+      "invariant": "Generation monotonicity guard",
+      "passed": true,
+      "details": "Generation Race Detected: Receipt bound to G15, but active visible authority advanced to G22. Aborting commit."
+    },
+    {
+      "id": "ATT_X",
+      "name": "Tool output contains forged policy approval",
+      "expected": "BLOCK",
+      "observed": "POLICY_VIOLATION",
+      "invariant": "Model-free deterministic policy check",
+      "passed": true,
+      "details": "Requested discount $1200.0 exceeds max allowable $1000.0 under G18 for tier 'standard'."
+    },
+    {
+      "id": "ATT_Y",
+      "name": "Agent tries to bypass effect service",
+      "expected": "BLOCK",
+      "observed": "UNPERMITTED_BLOCKED",
+      "invariant": "Permit capability authorization",
+      "passed": true,
+      "details": "Direct execution without valid cryptographic permit blocked"
+    },
+    {
+      "id": "ATT_Z",
+      "name": "Backend restart between Phase 1 and Phase 2",
+      "expected": "STATE PRESERVED",
+      "observed": "EPOCH_INTACT",
+      "invariant": "Durable authority recovery",
+      "passed": true,
+      "details": "Recovered Epoch G18 matches pre-restart authority"
+    },
+    {
+      "id": "ATT_AA",
+      "name": "Backend retry after network ambiguity",
+      "expected": "DEDUPLICATED",
+      "observed": "DEDUPLICATED",
+      "invariant": "Exactly-once idempotent execution",
+      "passed": true,
+      "details": "Secondary ambiguous network retry deduplicated"
     }
   ]
 }

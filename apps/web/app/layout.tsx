@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Navbar } from "@/components/Navbar";
+import { PremiumNav } from "@/components/PremiumNav";
 
 export const metadata: Metadata = {
-  title: "QUOIN — Policy-Generation Fence for Professional Agents",
-  description: "Accepted is not the same as visible. Fencing agent actions to verified policy authority.",
+  title: "QUOIN — Deterministic Policy-Generation Fence for Autonomous Agents",
+  description: "Accepted is not the same as visible. Eliminating in-flight cutover races across four strictly isolated architectural planes.",
 };
 
 export default function RootLayout({
@@ -13,19 +13,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen flex flex-col antialiased">
-        <Navbar />
+    <html lang="en" className="dark">
+      <body className="min-h-screen flex flex-col antialiased bg-[var(--bg)] text-[var(--t2)] selection:bg-[var(--rec)] selection:text-white transition-colors duration-200">
+        <PremiumNav />
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-paper-200 py-8 text-center text-xs font-mono text-graphite-subtle bg-paper-100">
+        <footer className="border-t border-[var(--line)] py-8 text-center text-xs font-mono text-[var(--t3)] bg-[var(--bg2)] transition-colors duration-200">
           <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div>QUOIN &middot; AWS Agents for Humans 2026 &middot; Professional Agents Track</div>
-            <div className="flex items-center gap-4">
-              <span>Pure Python Kernel</span>
+            <div>QUOIN &middot; Deterministic Policy-Generation Fence &middot; 4-Plane Architecture</div>
+            <div className="flex items-center gap-4 text-[var(--t3)]">
+              <span>Plane A: Bedrock / Strands</span>
               <span>&bull;</span>
-              <span>AWS AgentCore Memory</span>
+              <span>Plane B: Deterministic Kernel</span>
               <span>&bull;</span>
-              <span>Strands Agents</span>
+              <span>Plane C: AgentCore Memory</span>
+              <span>&bull;</span>
+              <span>Plane D: Execution Permits</span>
             </div>
           </div>
         </footer>

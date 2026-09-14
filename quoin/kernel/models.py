@@ -54,7 +54,7 @@ class DecisionProposal(BaseModel):
     request_id: str
     requested_action: str
     requested_value: Optional[float] = None
-    rationale: str
+    rationale: str = ""
     candidate_policy_generation: int
     parameters: Dict[str, Any] = Field(default_factory=dict)
 
@@ -67,8 +67,8 @@ class AuthorityReceipt(BaseModel):
     policy_hash: str
     request_hash: str
     proposal_hash: str
-    authority_snapshot_hash: str
-    effect_hash: str
+    authority_snapshot_hash: str = ""
+    effect_hash: str = ""
     issued_at: datetime
     expires_at: datetime
     kernel_version: str = "1.0.0"

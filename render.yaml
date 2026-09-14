@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: quoin-api
+    env: python
+    buildCommand: pip install -r apps/api/requirements.txt
+    startCommand: uvicorn apps.api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: QUOIN_MODE
+        value: local
+
+  - type: web
+    name: quoin-web
+    env: node
+    rootDir: apps/web
+    buildCommand: npm install && npm run build
+    startCommand: npm start -- -p $PORT
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: quoin-api
+          property: host
+

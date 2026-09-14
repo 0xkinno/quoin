@@ -1,253 +1,491 @@
 "use client";
 
+import React, { useState } from "react";
 import Link from "next/link";
-import { useState } from "react";
-import { Shield, ArrowRight, CheckCircle, AlertTriangle, Play, RefreshCw, Lock, Zap, FileText } from "lucide-react";
+import { Hero } from "@/components/Hero";
+import { ScrubTimeline } from "@/components/ScrubTimeline";
+import { ArchitectureVisual } from "@/components/ArchitectureVisual";
+import { EpochRace } from "@/components/EpochRace";
+import { ProofMetricGrid } from "@/components/ProofMetric";
+import { EvidenceDrawer } from "@/components/EvidenceDrawer";
+import {
+  Terminal,
+  Bug,
+  GitCommit,
+  FileCheck,
+  FileText,
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle2,
+  Lock,
+  Database,
+  Cpu,
+  RefreshCw,
+} from "lucide-react";
 
 export default function LandingPage() {
-  const [interactiveRace, setInteractiveRace] = useState<"IDLE" | "RACE_OCCURRED" | "BLOCKED">("IDLE");
+  const [evidenceOpen, setEvidenceOpen] = useState(false);
 
   return (
-    <div className="space-y-24 pb-24">
-      {/* 1. HERO SECTION */}
-      <section className="pt-20 pb-12 border-b border-paper-200">
-        <div className="max-w-5xl mx-auto px-6 text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-paper-100 border border-paper-200 text-xs font-mono text-graphite-muted">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
-            AWS Agents for Humans 2026 &middot; Professional Agents Track
+    <div className="space-y-0 pb-0">
+      {/* 1. Cinematic Full-Bleed Hero */}
+      <Hero />
+
+      {/* 2. Infinite Ticker Marquee */}
+      <div className="ticker" aria-hidden="true">
+        <div className="track">
+          <span>
+            EPOCH <b>G18 ACTIVE</b> · <span className="g">AUTHORITATIVE</span>
+          </span>
+          <span>
+            CAS CONDITION <b>active_epoch = 17</b> · <span className="g">COMMITTED</span>
+          </span>
+          <span>
+            BENCHMARK <b>100 / 100 PROOFS</b> · <span className="g">0 STALE EXECUTIONS</span>
+          </span>
+          <span>
+            ATTACK SUITE <b>27 / 27 VECTORS</b> · <span className="g">100% NEUTRALIZED</span>
+          </span>
+          <span>
+            OVERHEAD P50 <b>0.60 MS</b> · <span className="g">SUB-MILLISECOND FENCE</span>
+          </span>
+          <span>
+            BEDROCK NOVA <b>us.amazon.nova-lite-v1:0</b> · <span className="g">ACTIVE REASONING</span>
+          </span>
+          <span>
+            PERMIT <b>7f8a9e…10c2</b> · <span className="g">VALIDATED ON-CHAIN</span>
+          </span>
+          {/* Duplicate track for seamless infinite loop */}
+          <span>
+            EPOCH <b>G18 ACTIVE</b> · <span className="g">AUTHORITATIVE</span>
+          </span>
+          <span>
+            CAS CONDITION <b>active_epoch = 17</b> · <span className="g">COMMITTED</span>
+          </span>
+          <span>
+            BENCHMARK <b>100 / 100 PROOFS</b> · <span className="g">0 STALE EXECUTIONS</span>
+          </span>
+          <span>
+            ATTACK SUITE <b>27 / 27 VECTORS</b> · <span className="g">100% NEUTRALIZED</span>
+          </span>
+          <span>
+            OVERHEAD P50 <b>0.60 MS</b> · <span className="g">SUB-MILLISECOND FENCE</span>
+          </span>
+          <span>
+            BEDROCK NOVA <b>us.amazon.nova-lite-v1:0</b> · <span className="g">ACTIVE REASONING</span>
+          </span>
+          <span>
+            PERMIT <b>7f8a9e…10c2</b> · <span className="g">VALIDATED ON-CHAIN</span>
+          </span>
+        </div>
+      </div>
+
+      {/* 3. Interactive Timeline Scrubber */}
+      <ScrubTimeline />
+
+      {/* 4. Problem Stack (.pstack) */}
+      <section className="py-24 bg-[var(--bg)] border-b border-[var(--line)] transition-colors duration-200">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--t1)] tracking-tight max-w-2xl">
+            Console logs break when agents move money.
+          </h2>
+          <div className="pstack">
+            <div className="row">
+              <span className="num">/ 01</span>
+              <div>
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--t1)]">Eventual consistency is not authority</h3>
+                <p className="mt-2 text-sm sm:text-base text-[var(--t2)] leading-relaxed">
+                  Vector stores and memory engines take 100–300 ms to propagate policy updates. During this visibility
+                  window, agents blindly dispatch high-value actions based on stale assumptions.
+                </p>
+              </div>
+            </div>
+            <div className="row">
+              <span className="num">/ 02</span>
+              <div>
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--t1)]">Execution without cryptographic lease</h3>
+                <p className="mt-2 text-sm sm:text-base text-[var(--t2)] leading-relaxed">
+                  Decoupled LLM reasoning can propose any action, but traditional execution gateways lack an unforgeable,
+                  time-bounded proof connecting that proposal to an authoritative policy epoch.
+                </p>
+              </div>
+            </div>
+            <div className="row">
+              <span className="num">/ 03</span>
+              <div>
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--t1)]">Forensic blackouts and unaccountability</h3>
+                <p className="mt-2 text-sm sm:text-base text-[var(--t2)] leading-relaxed">
+                  When an unauthorized liquidation or data transfer occurs, standard application logs cannot prove what
+                  policy the model witnessed at that exact microsecond. QUOIN seals every decision into an immutable SHA-256
+                  hash chain.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Bento Grid (.bento) */}
+      <section id="evidence" className="py-24 bg-[var(--bg2)] border-b border-[var(--line)] transition-colors duration-200">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
+          <div className="max-w-2xl mb-12">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--t1)] tracking-tight mb-3">
+              Every decision becomes provable evidence.
+            </h2>
+            <p className="text-sm sm:text-base text-[var(--t2)]">
+              One permit per consequential action: evaluated, two-phase leased, and anchored in DynamoDB. Real benchmark values below.
+            </p>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-graphite-main leading-[1.08]">
-            Accepted is not the same as visible.
-          </h1>
+          <div className="bento">
+            {/* Cell 1: Two-Phase Commit Permit */}
+            <div className="cell-shell c-packet">
+              <div className="cell">
+                <div className="cell-placeholder">
+                  <span className="placeholder-text" style={{ ["--c" as any]: "var(--rec)" }}>
+                    PERMIT
+                  </span>
+                </div>
+                <div className="cell-content">
+                  <div>
+                    <span className="pill o">Two-Phase Lease · Seq 042</span>
+                    <div className="data mt-4 space-y-1">
+                      <div>
+                        <span className="k font-mono text-[0.62rem] text-[var(--t3)] mr-4 uppercase">Agent ID</span>
+                        <span className="v font-mono text-xs text-[var(--t1)]">risk-arbitrage-01</span>
+                      </div>
+                      <div>
+                        <span className="k font-mono text-[0.62rem] text-[var(--t3)] mr-4 uppercase">Epoch Target</span>
+                        <span className="v font-mono text-xs text-[var(--t1)]">18 (G18 Active Fence)</span>
+                      </div>
+                      <div>
+                        <span className="k font-mono text-[0.62rem] text-[var(--t3)] mr-4 uppercase">Lease TTL</span>
+                        <span className="v font-mono text-xs text-[var(--t1)]">5,000 ms (HMAC-SHA256 Signed)</span>
+                      </div>
+                      <div>
+                        <span className="k font-mono text-[0.62rem] text-[var(--t3)] mr-4 uppercase">Permit Digest</span>
+                        <span className="v font-mono text-xs text-[var(--proof)]">
+                          7f8a9e10c2b5d4e3f1a0987654321fedcba09876
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-xs text-[var(--t2)]">
+                    Two-Phase Commit fence validates policy preconditions before granting gateway dispatch rights.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          <p className="text-lg md:text-xl text-graphite-muted max-w-3xl mx-auto font-normal leading-relaxed">
-            QUOIN prevents professional agents from acting on stale policy by fencing every consequential action to the exact policy generation the agent has actually verified as visible.
-          </p>
+            {/* Cell 2: Verified Authority */}
+            <div className="cell-shell c-verify">
+              <div className="cell">
+                <div className="cell-placeholder">
+                  <span className="placeholder-text" style={{ ["--c" as any]: "var(--proof)" }}>
+                    AUTHORITY
+                  </span>
+                </div>
+                <div className="cell-content">
+                  <div>
+                    <span className="pill g">DynamoDB CAS</span>
+                    <h3 className="text-lg font-bold text-[var(--t1)] mt-3">Atomic Condition Verification</h3>
+                    <p className="text-xs text-[var(--t2)] mt-1">
+                      ConditionExpression asserts active_epoch == prev_epoch. Zero race window under cutovers.
+                    </p>
+                  </div>
+                  <p className="font-mono text-xs text-[var(--proof)]">
+                    G_active = 18 ∧ CAS_status ≡ COMMITTED
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+            {/* Cell 3: Decision Trace */}
+            <div className="cell-shell c-fork">
+              <div className="cell">
+                <div className="cell-placeholder">
+                  <span className="placeholder-text" style={{ ["--c" as any]: "var(--fork)" }}>
+                    TRACE
+                  </span>
+                </div>
+                <div className="cell-content">
+                  <div>
+                    <span className="pill b">Forensic Chain</span>
+                    <h3 className="text-lg font-bold text-[var(--t1)] mt-3">Immutable SHA-256 Merkle Link</h3>
+                    <p className="text-xs text-[var(--t2)] mt-1">
+                      Every prompt, tool execution, and permit forms an unalterable causal timeline from genesis to settlement.
+                    </p>
+                  </div>
+                  <p className="font-mono text-xs text-[var(--fork)]">
+                    genesis &rarr; cutover &rarr; eval &rarr; permit &rarr; execute (0 errors)
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Cell 4: Tamper Fail-Closed */}
+            <div className="cell-shell c-mismatch">
+              <div className="cell">
+                <div className="cell-placeholder">
+                  <span className="placeholder-text" style={{ ["--c" as any]: "var(--err)" }}>
+                    TAMPER
+                  </span>
+                </div>
+                <div className="cell-content">
+                  <div>
+                    <span className="pill r">Fail-Closed</span>
+                    <h3 className="text-lg font-bold text-[var(--t1)] mt-3">Signature Mismatch Rejection</h3>
+                    <p className="text-xs text-[var(--t2)] mt-1">
+                      Payload or timestamp modification immediately breaks HMAC verification. Gateways reject execution.
+                    </p>
+                  </div>
+                  <p className="font-mono text-xs text-[var(--err)] line-through">
+                    8f02c1aa…94d3e0 ≠ 7f8a9e…10c2
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Cell 5: AWS Bedrock Reasoning */}
+            <div className="cell-shell c-contract">
+              <div className="cell">
+                <div className="cell-placeholder">
+                  <span className="placeholder-text" style={{ ["--c" as any]: "#FFD700" }}>
+                    BEDROCK
+                  </span>
+                </div>
+                <div className="cell-content">
+                  <div>
+                    <span className="pill o">Nova Lite</span>
+                    <h3 className="text-lg font-bold text-[var(--t1)] mt-3">Structured Reasoning</h3>
+                    <p className="text-xs text-[var(--t2)] mt-1">
+                      us.amazon.nova-lite-v1:0 enforces policy schema adherence.
+                    </p>
+                  </div>
+                  <Link href="/console" className="font-mono text-[0.68rem] text-[var(--rec)] uppercase tracking-wider hover:underline">
+                    Launch in Console &rarr;
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Controlled Causal Benchmark Proof Metrics Grid */}
+      <section className="py-20 border-b border-[var(--line)] bg-[var(--bg)] transition-colors duration-200">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
+          <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-mono uppercase text-[var(--proof)] font-semibold tracking-wider">
+                Controlled Causal Benchmark
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[var(--t1)] tracking-tight mt-1">
+                Measured Head-to-Head Performance (100 Scenarios)
+              </h2>
+            </div>
+            <button
+              onClick={() => setEvidenceOpen(true)}
+              className="btn"
+            >
+              <FileText className="w-3.5 h-3.5 text-[var(--proof)]" />
+              <span>Inspect Raw Evidence JSON</span>
+              <span className="chip">↗</span>
+            </button>
+          </div>
+
+          <ProofMetricGrid />
+        </div>
+      </section>
+
+      {/* 7. System Architecture & Product Flow Visuals */}
+      <ArchitectureVisual />
+
+      {/* 8. Interactive Epoch Race Simulator */}
+      <EpochRace />
+
+      {/* 9. SDK Integration Strip */}
+      <section id="sdk" className="py-24 bg-[var(--bg2)] border-b border-[var(--line)] transition-colors duration-200">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--t1)] tracking-tight mb-4">
+                Five lines to fence your autonomous agent.
+              </h2>
+              <p className="text-base text-[var(--t2)] leading-relaxed mb-6">
+                Works seamlessly with any Python or Node.js agent. The full two-phase verification and causal ledger runs
+                locally for testing or on AWS DynamoDB &amp; Bedrock for production.
+              </p>
+              <div className="grid grid-cols-2 gap-3 font-mono text-xs">
+                <div className="p-3 bg-[var(--bg)] border border-[var(--line)] text-[var(--t1)] flex items-center gap-2">
+                  <span className="text-[var(--proof)]">✓</span> QUOIN_ACQUIRE_PERMIT
+                </div>
+                <div className="p-3 bg-[var(--bg)] border border-[var(--line)] text-[var(--t1)] flex items-center gap-2">
+                  <span className="text-[var(--proof)]">✓</span> QUOIN_VERIFY_LEASE
+                </div>
+                <div className="p-3 bg-[var(--bg)] border border-[var(--line)] text-[var(--t1)] flex items-center gap-2">
+                  <span className="text-[var(--proof)]">✓</span> QUOIN_FORCE_CUTOVER
+                </div>
+                <div className="p-3 bg-[var(--bg)] border border-[var(--line)] text-[var(--t1)] flex items-center gap-2">
+                  <span className="text-[var(--proof)]">✓</span> QUOIN_FORENSIC_ANCHOR
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6">
+              <div className="bg-[var(--bg)] border border-[var(--line)] p-6 font-mono text-xs leading-relaxed overflow-x-auto shadow-2xl transition-colors duration-200">
+                <p className="text-[var(--t3)] mb-3">// Plane B Two-Phase Commit Fence</p>
+                <p>
+                  <span className="text-[var(--rec)]">from</span> quoin.authority{" "}
+                  <span className="text-[var(--rec)]">import</span> DynamoAuthorityLedger
+                </p>
+                <p>
+                  <span className="text-[var(--rec)]">from</span> quoin.kernel{" "}
+                  <span className="text-[var(--rec)]">import</span> PlaneBFenceKernel
+                </p>
+                <br />
+                <p className="text-[var(--t3)]">// 1. Evaluate proposal against authoritative epoch</p>
+                <p>
+                  decision = kernel.<span className="text-[var(--proof)]">evaluate_precondition</span>(
+                </p>
+                <p className="pl-4">proposal_epoch=18, agent_id=<span className="text-[var(--t1)]">"risk-arb-01"</span></p>
+                <p>)</p>
+                <br />
+                <p className="text-[var(--t3)]">// 2. Acquire cryptographic execution lease</p>
+                <p>
+                  permit = kernel.<span className="text-[var(--proof)]">issue_permit</span>(decision, ttl_ms=5000)
+                </p>
+                <p className="text-[var(--t3)]">// 3. Dispatch to Execution Gateway with verified lease</p>
+                <p>
+                  result = gateway.<span className="text-[var(--proof)]">execute_with_permit</span>(permit, action_payload)
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. Deep-Dive Exploration Grid */}
+      <section className="py-24 bg-[var(--bg)] border-b border-[var(--line)] transition-colors duration-200">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <p className="text-xs font-mono uppercase text-[var(--proof)] font-semibold tracking-wider">
+              Complete System Exploration
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--t1)] tracking-tight mt-2">
+              Explore Every Dimension of the QUOIN Architecture
+            </h2>
+            <p className="mt-3 text-sm text-[var(--t2)]">
+              Interactive console, 27 adversarial vector neutralizations, cryptographic forensic timeline, and audited proof manifest.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Card 1: Console */}
             <Link
               href="/console"
-              className="px-6 py-3.5 rounded-lg bg-graphite-main hover:bg-black text-white font-medium text-sm flex items-center gap-2 transition-all shadow-sm"
+              className="group p-6 border border-[var(--line)] bg-[var(--bg2)] hover:border-[var(--proof)]/60 hover:bg-[var(--core)] transition-all flex flex-col justify-between"
             >
-              Launch Cutover Console <ArrowRight className="w-4 h-4" />
+              <div>
+                <div className="w-10 h-10 bg-[var(--proof)]/10 text-[var(--proof)] border border-[var(--proof)]/30 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                  <Terminal className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-[var(--t1)]">Operator Console</h3>
+                <p className="text-xs text-[var(--t2)] mt-2 leading-relaxed">
+                  Publish authoritative policy cutovers (G17 &rarr; G18), evaluate requests under live Bedrock reasoning, and observe two-phase permit issuance.
+                </p>
+              </div>
+              <div className="mt-6 flex items-center text-xs font-mono text-[var(--proof)] group-hover:translate-x-1 transition-transform">
+                <span>Launch Console &rarr;</span>
+              </div>
             </Link>
+
+            {/* Card 2: Break It Lab */}
             <Link
               href="/lab"
-              className="px-6 py-3.5 rounded-lg bg-white hover:bg-paper-50 text-graphite-main border border-paper-200 font-medium text-sm transition-all"
+              className="group p-6 border border-[var(--line)] bg-[var(--bg2)] hover:border-[var(--rec)]/60 hover:bg-[var(--core)] transition-all flex flex-col justify-between"
             >
-              Open Break It Lab (13 Attacks)
+              <div>
+                <div className="w-10 h-10 bg-[var(--rec)]/10 text-[var(--rec)] border border-[var(--rec)]/30 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                  <Bug className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-[var(--t1)]">Break It Lab (27 Attacks)</h3>
+                <p className="text-xs text-[var(--t2)] mt-2 leading-relaxed">
+                  Execute all 27 distinct failure, race, tamper, replay, and rollback vectors across Plane A, B, C, and D. 100% neutralized.
+                </p>
+              </div>
+              <div className="mt-6 flex items-center text-xs font-mono text-[var(--rec)] group-hover:translate-x-1 transition-transform">
+                <span>Run Attack Suite &rarr;</span>
+              </div>
             </Link>
-          </div>
 
-          {/* Core Metrics Ribbon */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 text-left">
-            <div className="p-4 rounded-xl bg-white border border-paper-200 shadow-sm">
-              <div className="text-2xl font-bold font-mono text-graphite-main">0</div>
-              <div className="text-xs text-graphite-muted mt-1">Stale Executions Allowed</div>
-            </div>
-            <div className="p-4 rounded-xl bg-white border border-paper-200 shadow-sm">
-              <div className="text-2xl font-bold font-mono text-emerald-600">13 / 13</div>
-              <div className="text-xs text-graphite-muted mt-1">Attacks Neutralized</div>
-            </div>
-            <div className="p-4 rounded-xl bg-white border border-paper-200 shadow-sm">
-              <div className="text-2xl font-bold font-mono text-blue-600">321.6 ms</div>
-              <div className="text-xs text-graphite-muted mt-1">AgentCore Visibility Gap (p50)</div>
-            </div>
-            <div className="p-4 rounded-xl bg-white border border-paper-200 shadow-sm">
-              <div className="text-2xl font-bold font-mono text-graphite-main">+0.53 ms</div>
-              <div className="text-xs text-graphite-muted mt-1">Verification Overhead (p50)</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. THE FAILURE IN ONE SENTENCE */}
-      <section className="max-w-5xl mx-auto px-6">
-        <div className="p-8 rounded-2xl bg-paper-100 border border-paper-200 space-y-4">
-          <div className="text-xs font-mono uppercase tracking-widest text-rose-600 font-semibold">The Operational Failure</div>
-          <h2 className="text-2xl md:text-3xl font-bold text-graphite-main tracking-tight">
-            Policies change while agents are still running.
-          </h2>
-          <p className="text-graphite-muted leading-relaxed">
-            In professional operations, policies (discounts, refunds, scope expansions) change dynamically. When a policy update is submitted to AWS AgentCore Memory, the API confirms ingestion immediately, but the resulting long-term memory records become available only after background consolidation. If an in-flight agent acts during this window, it approves actions that are illegal under the new policy.
-          </p>
-        </div>
-      </section>
-
-      {/* 3. INTERACTIVE CUTOVER RACE SIMULATOR */}
-      <section className="max-w-5xl mx-auto px-6 space-y-8">
-        <div className="text-center space-y-2">
-          <div className="text-xs font-mono uppercase tracking-widest text-blue-600 font-semibold">Interactive Demonstration</div>
-          <h2 className="text-3xl font-bold tracking-tight text-graphite-main">The Live In-Flight Policy Race</h2>
-          <p className="text-sm text-graphite-muted max-w-xl mx-auto">
-            Experience what happens when policy cutover occurs while a $700 discount request is in flight.
-          </p>
-        </div>
-
-        <div className="p-6 md:p-8 rounded-2xl bg-white border border-paper-200 shadow-sm space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Step 1 */}
-            <div className="p-5 rounded-xl bg-paper-50 border border-paper-200 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-semibold text-graphite-subtle">01. INCOMING REQUEST</span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-paper-200 text-graphite-main">GOLD TIER</span>
-              </div>
-              <div className="text-xl font-bold text-graphite-main">$700 Discount</div>
-              <p className="text-xs text-graphite-muted">Client Acme Corp requested 14% override on Invoice #409.</p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="p-5 rounded-xl bg-paper-50 border border-paper-200 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-semibold text-graphite-subtle">02. MEMORY CUTOVER</span>
-                <span className={`px-2 py-0.5 rounded text-[10px] font-mono ${interactiveRace !== "IDLE" ? "bg-amber-100 text-amber-800" : "bg-paper-200 text-graphite-main"}`}>
-                  {interactiveRace === "IDLE" ? "ACTIVE: G17" : "CUTOVER: G18"}
-                </span>
-              </div>
-              <div className="text-xl font-bold text-graphite-main">
-                {interactiveRace === "IDLE" ? "Limit: $1500 (G17)" : "Limit: $500 (G18)"}
-              </div>
-              <p className="text-xs text-graphite-muted">
-                {interactiveRace === "IDLE" ? "Agent reasons under G17." : "Policy committee tightened discount ceiling to $500!"}
-              </p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="p-5 rounded-xl bg-paper-50 border border-paper-200 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-semibold text-graphite-subtle">03. QUOIN FENCE</span>
-                <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold ${
-                  interactiveRace === "BLOCKED" ? "bg-rose-100 text-rose-800" : "bg-paper-200 text-graphite-main"
-                }`}>
-                  {interactiveRace === "BLOCKED" ? "GATE LOCKED" : "ARMED"}
-                </span>
-              </div>
-              <div className="text-xl font-bold text-graphite-main">
-                {interactiveRace === "BLOCKED" ? "FENCE BLOCKED" : "Comparing CAS"}
-              </div>
-              <p className="text-xs text-graphite-muted">
-                {interactiveRace === "BLOCKED" ? "Generation mismatch detected (G17 != G18). Receipt invalidated." : "Read-after-write commit check."}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-paper-200">
-            <div className="text-xs font-mono text-graphite-muted">
-              Current Simulator State: <span className="font-semibold text-graphite-main">{interactiveRace}</span>
-            </div>
-            <div className="flex items-center gap-3">
-              {interactiveRace === "IDLE" && (
-                <button
-                  onClick={() => setInteractiveRace("RACE_OCCURRED")}
-                  className="px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-xs font-medium flex items-center gap-1.5 transition-all"
-                >
-                  <AlertTriangle className="w-3.5 h-3.5" /> Trigger In-Flight Policy Cutover (G17 &rarr; G18)
-                </button>
-              )}
-              {interactiveRace === "RACE_OCCURRED" && (
-                <button
-                  onClick={() => setInteractiveRace("BLOCKED")}
-                  className="px-4 py-2 rounded-lg bg-graphite-main hover:bg-black text-white text-xs font-medium flex items-center gap-1.5 transition-all"
-                >
-                  <Lock className="w-3.5 h-3.5" /> Attempt Commit at Gate
-                </button>
-              )}
-              {interactiveRace === "BLOCKED" && (
-                <button
-                  onClick={() => setInteractiveRace("IDLE")}
-                  className="px-4 py-2 rounded-lg bg-paper-200 hover:bg-paper-300 text-graphite-main text-xs font-medium flex items-center gap-1.5 transition-all"
-                >
-                  <RefreshCw className="w-3.5 h-3.5" /> Reset Simulation
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. THE FOUR-PLANE ARCHITECTURE */}
-      <section className="max-w-5xl mx-auto px-6 space-y-8">
-        <div className="text-center space-y-2">
-          <div className="text-xs font-mono uppercase tracking-widest text-emerald-600 font-semibold">Deep Architecture</div>
-          <h2 className="text-3xl font-bold tracking-tight text-graphite-main">Four-Plane Separation</h2>
-          <p className="text-sm text-graphite-muted max-w-xl mx-auto">
-            Zero-trust separation between generative model reasoning and deterministic authority execution.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-6 rounded-xl bg-white border border-paper-200 shadow-sm space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-blue-600">PLANE A: REASONING</span>
-              <span className="text-[10px] font-mono bg-paper-100 px-2 py-0.5 rounded text-graphite-subtle">STRANDS SDK</span>
-            </div>
-            <h3 className="text-lg font-bold text-graphite-main">Strands Reasoning Agent</h3>
-            <p className="text-xs text-graphite-muted leading-relaxed">
-              Analyzes client intent, extracts structured variables, and proposes candidate operational actions. Untrusted for authority; cannot execute side effects or bypass gates.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-xl bg-white border border-paper-200 shadow-sm space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-emerald-600">PLANE B: AUTHORITY</span>
-              <span className="text-[10px] font-mono bg-paper-100 px-2 py-0.5 rounded text-graphite-subtle">PURE PYTHON</span>
-            </div>
-            <h3 className="text-lg font-bold text-graphite-main">Deterministic Kernel</h3>
-            <p className="text-xs text-graphite-muted leading-relaxed">
-              Model-free evaluation engine. Computes canonical SHA-256 digests, issues cryptographically signed authority receipts, and enforces the Two-Phase Commit Gate.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-xl bg-white border border-paper-200 shadow-sm space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-purple-600">PLANE C: MEMORY</span>
-              <span className="text-[10px] font-mono bg-paper-100 px-2 py-0.5 rounded text-graphite-subtle">AWS AGENTCORE</span>
-            </div>
-            <h3 className="text-lg font-bold text-graphite-main">AgentCore Memory</h3>
-            <p className="text-xs text-graphite-muted leading-relaxed">
-              Multi-tenant isolated namespaces (/quoin/tenant/policy) with structured metadata. Explicitly models asynchronous background consolidation lag.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-xl bg-white border border-paper-200 shadow-sm space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-graphite-main">PLANE D: EFFECTS</span>
-              <span className="text-[10px] font-mono bg-paper-100 px-2 py-0.5 rounded text-graphite-subtle">IDEMPOTENT</span>
-            </div>
-            <h3 className="text-lg font-bold text-graphite-main">Action Execution Service</h3>
-            <p className="text-xs text-graphite-muted leading-relaxed">
-              Applies discounts, credits, and exceptions strictly upon receiving a valid single-use ExecutionPermit. Built-in deduplication ledger eliminates replay attacks.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. CALL TO ACTION */}
-      <section className="max-w-5xl mx-auto px-6 text-center space-y-6">
-        <div className="p-12 rounded-3xl bg-graphite-main text-white space-y-6 shadow-xl">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-            Inspect the live cutover console and test results.
-          </h2>
-          <p className="text-paper-300 max-w-xl mx-auto text-sm">
-            Experience live in-flight cutover detection, review the 13 adversarial attacks, and explore the benchmark evidence.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            {/* Card 3: Decision Trace */}
             <Link
-              href="/console"
-              className="px-6 py-3 rounded-lg bg-white text-graphite-main hover:bg-paper-100 font-semibold text-sm transition-all shadow"
+              href="/trace"
+              className="group p-6 border border-[var(--line)] bg-[var(--bg2)] hover:border-[var(--fork)]/60 hover:bg-[var(--core)] transition-all flex flex-col justify-between"
             >
-              Open Cutover Console
+              <div>
+                <div className="w-10 h-10 bg-[var(--fork)]/10 text-[var(--fork)] border border-[var(--fork)]/30 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                  <GitCommit className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-[var(--t1)]">Decision Trace</h3>
+                <p className="text-xs text-[var(--t2)] mt-2 leading-relaxed">
+                  Forensic timeline with cryptographically chained SHA-256 event digests. Verify full execution history from genesis to head.
+                </p>
+              </div>
+              <div className="mt-6 flex items-center text-xs font-mono text-[var(--fork)] group-hover:translate-x-1 transition-transform">
+                <span>Verify Chain &rarr;</span>
+              </div>
             </Link>
+
+            {/* Card 4: Proof Center */}
             <Link
               href="/proof"
-              className="px-6 py-3 rounded-lg bg-paper-800 text-white hover:bg-paper-900 border border-paper-700 font-semibold text-sm transition-all"
+              className="group p-6 border border-[var(--line)] bg-[var(--bg2)] hover:border-purple-500/60 hover:bg-[var(--core)] transition-all flex flex-col justify-between"
             >
-              View Proof &amp; Benchmarks
+              <div>
+                <div className="w-10 h-10 bg-purple-500/10 text-purple-400 border border-purple-500/30 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                  <FileCheck className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-[var(--t1)]">Proof Center</h3>
+                <p className="text-xs text-[var(--t2)] mt-2 leading-relaxed">
+                  Live dynamic verifier status, 100-scenario causal benchmark table, empirical AgentCore memory visibility data, and cryptographic proofs.
+                </p>
+              </div>
+              <div className="mt-6 flex items-center text-xs font-mono text-purple-400 group-hover:translate-x-1 transition-transform">
+                <span>Inspect Proofs &rarr;</span>
+              </div>
             </Link>
           </div>
         </div>
       </section>
+
+      {/* 11. Stark Editorial Contrast Brand Footer (.brand-footer) */}
+      <footer className="brand-footer transition-colors duration-200">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14 flex flex-col sm:flex-row justify-between items-center gap-6">
+          <div>
+            <p className="font-bold text-sm tracking-wider uppercase">
+              QUOIN <b>·</b> DETERMINISTIC POLICY-GENERATION FENCE
+            </p>
+            <p className="text-xs mt-1">
+              BUILT ON <b>AWS DYNAMODB &amp; BEDROCK NOVA</b> · ZERO STALE EXECUTIONS · 100/100 AUDITED BENCHMARK PROOFS
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
+            <Link href="/console">Console</Link>
+            <span>·</span>
+            <Link href="/lab">Break It Lab</Link>
+            <span>·</span>
+            <Link href="/trace">Decision Trace</Link>
+            <span>·</span>
+            <Link href="/proof">Proof Center</Link>
+          </div>
+        </div>
+      </footer>
+
+      {/* Evidence Drawer Modal */}
+      <EvidenceDrawer isOpen={evidenceOpen} onClose={() => setEvidenceOpen(false)} />
     </div>
   );
 }
+

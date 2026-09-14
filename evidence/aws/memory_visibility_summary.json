@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "campaign": "Empirical AgentCore Memory Visibility Measurement",
+    "timestamp": "2026-09-14T11:48:10.483561+00:00",
+    "total_trials": 100,
+    "region": "us-east-1",
+    "source": "local_simulator",
+    "memory_id": "local-simulated-memory-01"
+  },
+  "ingest_acknowledgment_ms": {
+    "mean": 5.63,
+    "median": 5.61,
+    "min": 5.08,
+    "max": 7.87
+  },
+  "visibility_lag_ms": {
+    "mean": 357.99,
+    "median": 357.44,
+    "p50": 357.47,
+    "p95": 363.89,
+    "p99": 381.62,
+    "min": 350.65,
+    "max": 381.62,
+    "stdev": 3.71
+  }
+}

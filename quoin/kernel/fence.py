@@ -22,14 +22,29 @@ class GenerationFence:
         self.receipt_ttl = timedelta(seconds=receipt_ttl_seconds)
         self.kernel_version = kernel_version
 
+    def validate_monotonicity(self, previous_gen: int, next_gen: int) -> bool:
+        """Validate that generations advance monotonically."""
+        return next_gen > previous_gen
+
     def evaluate_proposal(
         self,
         proposal: DecisionProposal,
         request_data: Dict[str, Any],
-        snapshot: AuthoritySnapshot,
+        snapshot: Optional[AuthoritySnapshot],
     ) -> FenceEvaluationResult:
         """Evaluate a proposal against the generation fence and active policy snapshot."""
         now = datetime.now(timezone.utc)
+
+        # 0. Check for active authority snapshot
+        if snapshot is None:
+            return FenceEvaluationResult(
+                allowed=False,
+                status="NO_ACTIVE_POLICY",
+                reason="No active visible authority snapshot available for tenant. Action blocked by generation fence.",
+                current_generation=0,
+                proposed_generation=proposal.candidate_policy_generation,
+                snapshot=None,
+            )
 
         # 1. Primary Invariant: Generation Equality Check
         if proposal.candidate_policy_generation != snapshot.generation:

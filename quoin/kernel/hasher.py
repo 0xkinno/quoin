@@ -36,8 +36,16 @@ class CanonicalHasher:
         return serialized.encode("utf-8")
 
     @classmethod
+    def to_canonical_json(cls, data: Any) -> str:
+        return cls.serialize(data).decode("utf-8")
+
+    @classmethod
     def digest(cls, data: Any) -> str:
         return hashlib.sha256(cls.serialize(data)).hexdigest()
+
+    @classmethod
+    def to_sha256(cls, data: Any) -> str:
+        return cls.digest(data)
 
     @classmethod
     def compute_policy_hash(cls, policy_record: Any) -> str:
@@ -48,6 +56,10 @@ class CanonicalHasher:
         else:
             dumped = policy_record
         return cls.digest(dumped)
+
+    @classmethod
+    def hash_policy(cls, policy_record: Any) -> str:
+        return cls.compute_policy_hash(policy_record)
 
     @classmethod
     def compute_request_hash(cls, request_data: Dict[str, Any]) -> str:

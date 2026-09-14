@@ -13,10 +13,13 @@ from quoin.effects.idempotency import IdempotencyLedger
 class QuoinFencedRunner:
     """Production QUOIN agent with deterministic generation fence."""
 
-    def __init__(self, memory_reader, effect_service: OperationalEffectService):
+    def __init__(self, memory_reader, effect_service: OperationalEffectService, enable_llm: bool = False):
         self.memory_reader = memory_reader
         self.effect_service = effect_service
-        self.agent = OperationalReasoningAgent(memory_reader_callable=lambda t: self.memory_reader())
+        self.agent = OperationalReasoningAgent(
+            memory_reader_callable=lambda t: self.memory_reader(),
+            enable_bedrock=enable_llm,
+        )
         self.fence = GenerationFence()
         self.gate = TwoPhaseCommitGate(authority_reader=self.memory_reader)
         self.committed_executions: List[Dict[str, Any]] = []

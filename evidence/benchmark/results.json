@@ -1,358 +1,1718 @@
 {
   "metadata": {
     "campaign": "Controlled Causal Benchmark: Baseline vs QUOIN",
-    "timestamp": "2026-09-14T07:11:07.235235+00:00",
-    "total_scenarios": 20
+    "timestamp": "2026-09-14T11:56:23.432467+00:00",
+    "total_scenarios": 100
   },
   "summary": {
-    "baseline_stale_policy_executions": 7,
+    "baseline_stale_policy_executions": 80,
     "quoin_stale_policy_executions": 0,
-    "unsafe_effects_prevented": 7,
+    "unsafe_effects_prevented": 80,
     "authorized_effects_preserved": 8,
-    "duplicate_executions_prevented": 2,
+    "duplicate_executions_prevented": 25,
     "false_blocks": 0,
-    "verification_overhead_ms_p50": 0.53,
-    "verification_overhead_ms_p95": 1.07
+    "verification_overhead_ms_p50": 0.6,
+    "verification_overhead_ms_p95": 1.33
   },
   "comparisons": [
     {
-      "scenario_id": "SCEN_01",
-      "description": "Standard within-limits discount under G17",
+      "scenario_id": "SCEN_001",
+      "description": "In-flight cutover: standard discount $650.0 valid under G17 ($1000.0), but G18 tightens to $500.0",
       "baseline": {
-        "scenario_id": "SCEN_01",
+        "scenario_id": "SCEN_001",
         "status": "COMMITTED",
-        "stale_execution_committed": null,
+        "stale_execution_committed": true,
+        "latency_ms": 0.39
+      },
+      "quoin": {
+        "scenario_id": "SCEN_001",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 1.191,
+        "added_overhead_ms": 0.801
+      }
+    },
+    {
+      "scenario_id": "SCEN_002",
+      "description": "In-flight cutover: gold discount $700.0 valid under G17 ($1100.0), but G18 tightens to $550.0",
+      "baseline": {
+        "scenario_id": "SCEN_002",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.291
+      },
+      "quoin": {
+        "scenario_id": "SCEN_002",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.706,
+        "added_overhead_ms": 0.415
+      }
+    },
+    {
+      "scenario_id": "SCEN_003",
+      "description": "In-flight cutover: silver discount $750.0 valid under G17 ($1200.0), but G18 tightens to $600.0",
+      "baseline": {
+        "scenario_id": "SCEN_003",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.214
+      },
+      "quoin": {
+        "scenario_id": "SCEN_003",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.928,
+        "added_overhead_ms": 0.715
+      }
+    },
+    {
+      "scenario_id": "SCEN_004",
+      "description": "In-flight cutover: standard discount $800.0 valid under G17 ($1300.0), but G18 tightens to $650.0",
+      "baseline": {
+        "scenario_id": "SCEN_004",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.142
+      },
+      "quoin": {
+        "scenario_id": "SCEN_004",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.628,
+        "added_overhead_ms": 0.486
+      }
+    },
+    {
+      "scenario_id": "SCEN_005",
+      "description": "In-flight cutover: gold discount $850.0 valid under G17 ($1400.0), but G18 tightens to $700.0",
+      "baseline": {
+        "scenario_id": "SCEN_005",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.155
+      },
+      "quoin": {
+        "scenario_id": "SCEN_005",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.767,
+        "added_overhead_ms": 0.612
+      }
+    },
+    {
+      "scenario_id": "SCEN_006",
+      "description": "In-flight cutover: silver discount $900.0 valid under G17 ($1500.0), but G18 tightens to $750.0",
+      "baseline": {
+        "scenario_id": "SCEN_006",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.15
+      },
+      "quoin": {
+        "scenario_id": "SCEN_006",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.697,
+        "added_overhead_ms": 0.548
+      }
+    },
+    {
+      "scenario_id": "SCEN_007",
+      "description": "In-flight cutover: standard discount $950.0 valid under G17 ($1600.0), but G18 tightens to $800.0",
+      "baseline": {
+        "scenario_id": "SCEN_007",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.169
+      },
+      "quoin": {
+        "scenario_id": "SCEN_007",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.653,
+        "added_overhead_ms": 0.483
+      }
+    },
+    {
+      "scenario_id": "SCEN_008",
+      "description": "In-flight cutover: gold discount $1000.0 valid under G17 ($1700.0), but G18 tightens to $850.0",
+      "baseline": {
+        "scenario_id": "SCEN_008",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.163
+      },
+      "quoin": {
+        "scenario_id": "SCEN_008",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.763,
+        "added_overhead_ms": 0.599
+      }
+    },
+    {
+      "scenario_id": "SCEN_009",
+      "description": "In-flight cutover: silver discount $1050.0 valid under G17 ($1800.0), but G18 tightens to $900.0",
+      "baseline": {
+        "scenario_id": "SCEN_009",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.155
+      },
+      "quoin": {
+        "scenario_id": "SCEN_009",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.732,
+        "added_overhead_ms": 0.577
+      }
+    },
+    {
+      "scenario_id": "SCEN_010",
+      "description": "In-flight cutover: standard discount $1100.0 valid under G17 ($1900.0), but G18 tightens to $950.0",
+      "baseline": {
+        "scenario_id": "SCEN_010",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.159
+      },
+      "quoin": {
+        "scenario_id": "SCEN_010",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 1.11,
+        "added_overhead_ms": 0.951
+      }
+    },
+    {
+      "scenario_id": "SCEN_011",
+      "description": "In-flight permission revocation: Action issue_service_credit permitted in G17 for standard, revoked in G18",
+      "baseline": {
+        "scenario_id": "SCEN_011",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.316
+      },
+      "quoin": {
+        "scenario_id": "SCEN_011",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.625,
+        "added_overhead_ms": 0.309
+      }
+    },
+    {
+      "scenario_id": "SCEN_012",
+      "description": "In-flight permission revocation: Action apply_discount permitted in G17 for silver, revoked in G18",
+      "baseline": {
+        "scenario_id": "SCEN_012",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.148
+      },
+      "quoin": {
+        "scenario_id": "SCEN_012",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.579,
+        "added_overhead_ms": 0.431
+      }
+    },
+    {
+      "scenario_id": "SCEN_013",
+      "description": "In-flight permission revocation: Action issue_service_credit permitted in G17 for gold, revoked in G18",
+      "baseline": {
+        "scenario_id": "SCEN_013",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.15
+      },
+      "quoin": {
+        "scenario_id": "SCEN_013",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.686,
+        "added_overhead_ms": 0.536
+      }
+    },
+    {
+      "scenario_id": "SCEN_014",
+      "description": "In-flight permission revocation: Action apply_discount permitted in G17 for standard, revoked in G18",
+      "baseline": {
+        "scenario_id": "SCEN_014",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.19
+      },
+      "quoin": {
+        "scenario_id": "SCEN_014",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.684,
+        "added_overhead_ms": 0.494
+      }
+    },
+    {
+      "scenario_id": "SCEN_015",
+      "description": "In-flight permission revocation: Action issue_service_credit permitted in G17 for silver, revoked in G18",
+      "baseline": {
+        "scenario_id": "SCEN_015",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.145
+      },
+      "quoin": {
+        "scenario_id": "SCEN_015",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.64,
+        "added_overhead_ms": 0.495
+      }
+    },
+    {
+      "scenario_id": "SCEN_016",
+      "description": "In-flight permission revocation: Action apply_discount permitted in G17 for gold, revoked in G18",
+      "baseline": {
+        "scenario_id": "SCEN_016",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.153
+      },
+      "quoin": {
+        "scenario_id": "SCEN_016",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 1.188,
+        "added_overhead_ms": 1.034
+      }
+    },
+    {
+      "scenario_id": "SCEN_017",
+      "description": "In-flight permission revocation: Action issue_service_credit permitted in G17 for standard, revoked in G18",
+      "baseline": {
+        "scenario_id": "SCEN_017",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.302
+      },
+      "quoin": {
+        "scenario_id": "SCEN_017",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.697,
+        "added_overhead_ms": 0.395
+      }
+    },
+    {
+      "scenario_id": "SCEN_018",
+      "description": "In-flight permission revocation: Action apply_discount permitted in G17 for silver, revoked in G18",
+      "baseline": {
+        "scenario_id": "SCEN_018",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.158
+      },
+      "quoin": {
+        "scenario_id": "SCEN_018",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.68,
+        "added_overhead_ms": 0.522
+      }
+    },
+    {
+      "scenario_id": "SCEN_019",
+      "description": "In-flight permission revocation: Action issue_service_credit permitted in G17 for gold, revoked in G18",
+      "baseline": {
+        "scenario_id": "SCEN_019",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.178
+      },
+      "quoin": {
+        "scenario_id": "SCEN_019",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.775,
+        "added_overhead_ms": 0.596
+      }
+    },
+    {
+      "scenario_id": "SCEN_020",
+      "description": "In-flight permission revocation: Action apply_discount permitted in G17 for standard, revoked in G18",
+      "baseline": {
+        "scenario_id": "SCEN_020",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.172
+      },
+      "quoin": {
+        "scenario_id": "SCEN_020",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.763,
+        "added_overhead_ms": 0.591
+      }
+    },
+    {
+      "scenario_id": "SCEN_021",
+      "description": "In-flight escalation threshold shift: $1200.0 requires mandatory escalation in G18",
+      "baseline": {
+        "scenario_id": "SCEN_021",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.172
+      },
+      "quoin": {
+        "scenario_id": "SCEN_021",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.283,
+        "added_overhead_ms": 0.111
+      }
+    },
+    {
+      "scenario_id": "SCEN_022",
+      "description": "In-flight escalation threshold shift: $1300.0 requires mandatory escalation in G18",
+      "baseline": {
+        "scenario_id": "SCEN_022",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.22
+      },
+      "quoin": {
+        "scenario_id": "SCEN_022",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.792,
+        "added_overhead_ms": 0.572
+      }
+    },
+    {
+      "scenario_id": "SCEN_023",
+      "description": "In-flight escalation threshold shift: $1400.0 requires mandatory escalation in G18",
+      "baseline": {
+        "scenario_id": "SCEN_023",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.17
+      },
+      "quoin": {
+        "scenario_id": "SCEN_023",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.249,
+        "added_overhead_ms": 0.079
+      }
+    },
+    {
+      "scenario_id": "SCEN_024",
+      "description": "In-flight escalation threshold shift: $1500.0 requires mandatory escalation in G18",
+      "baseline": {
+        "scenario_id": "SCEN_024",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.173
+      },
+      "quoin": {
+        "scenario_id": "SCEN_024",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 1.281,
+        "added_overhead_ms": 1.108
+      }
+    },
+    {
+      "scenario_id": "SCEN_025",
+      "description": "In-flight escalation threshold shift: $1600.0 requires mandatory escalation in G18",
+      "baseline": {
+        "scenario_id": "SCEN_025",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.366
+      },
+      "quoin": {
+        "scenario_id": "SCEN_025",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.286,
+        "added_overhead_ms": -0.08
+      }
+    },
+    {
+      "scenario_id": "SCEN_026",
+      "description": "In-flight escalation threshold shift: $1700.0 requires mandatory escalation in G18",
+      "baseline": {
+        "scenario_id": "SCEN_026",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.18
+      },
+      "quoin": {
+        "scenario_id": "SCEN_026",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.743,
+        "added_overhead_ms": 0.563
+      }
+    },
+    {
+      "scenario_id": "SCEN_027",
+      "description": "In-flight escalation threshold shift: $1800.0 requires mandatory escalation in G18",
+      "baseline": {
+        "scenario_id": "SCEN_027",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.186
+      },
+      "quoin": {
+        "scenario_id": "SCEN_027",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.31,
+        "added_overhead_ms": 0.123
+      }
+    },
+    {
+      "scenario_id": "SCEN_028",
+      "description": "In-flight escalation threshold shift: $1900.0 requires mandatory escalation in G18",
+      "baseline": {
+        "scenario_id": "SCEN_028",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.175
+      },
+      "quoin": {
+        "scenario_id": "SCEN_028",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.772,
+        "added_overhead_ms": 0.597
+      }
+    },
+    {
+      "scenario_id": "SCEN_029",
+      "description": "In-flight escalation threshold shift: $2000.0 requires mandatory escalation in G18",
+      "baseline": {
+        "scenario_id": "SCEN_029",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.169
+      },
+      "quoin": {
+        "scenario_id": "SCEN_029",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.411,
+        "added_overhead_ms": 0.242
+      }
+    },
+    {
+      "scenario_id": "SCEN_030",
+      "description": "In-flight escalation threshold shift: $2100.0 requires mandatory escalation in G18",
+      "baseline": {
+        "scenario_id": "SCEN_030",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.182
+      },
+      "quoin": {
+        "scenario_id": "SCEN_030",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 1.259,
+        "added_overhead_ms": 1.077
+      }
+    },
+    {
+      "scenario_id": "SCEN_031",
+      "description": "Duplicate permit replay attack / network retry #1 for standard $100.0",
+      "baseline": {
+        "scenario_id": "SCEN_031",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.01
+      },
+      "quoin": {
+        "scenario_id": "SCEN_031",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.543,
+        "added_overhead_ms": 1.533
+      }
+    },
+    {
+      "scenario_id": "SCEN_032",
+      "description": "Duplicate permit replay attack / network retry #2 for silver $115.0",
+      "baseline": {
+        "scenario_id": "SCEN_032",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.011
+      },
+      "quoin": {
+        "scenario_id": "SCEN_032",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 2.098,
+        "added_overhead_ms": 2.087
+      }
+    },
+    {
+      "scenario_id": "SCEN_033",
+      "description": "Duplicate permit replay attack / network retry #3 for gold $130.0",
+      "baseline": {
+        "scenario_id": "SCEN_033",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
         "latency_ms": 0.009
       },
       "quoin": {
-        "scenario_id": "SCEN_01",
-        "status": "COMMITTED",
+        "scenario_id": "SCEN_033",
+        "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 0.625,
-        "added_overhead_ms": 0.616
+        "latency_ms": 1.266,
+        "added_overhead_ms": 1.257
       }
     },
     {
-      "scenario_id": "SCEN_02",
-      "description": "Gold tier discount valid under G17 ($1200 <= $1500), but cutover to G18 occurs in-flight tightening limit to $1000",
+      "scenario_id": "SCEN_034",
+      "description": "Duplicate permit replay attack / network retry #4 for standard $145.0",
       "baseline": {
-        "scenario_id": "SCEN_02",
-        "status": "COMMITTED",
-        "stale_execution_committed": true,
-        "latency_ms": 0.146
-      },
-      "quoin": {
-        "scenario_id": "SCEN_02",
-        "status": "ABORTED_STALE_GENERATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.58,
-        "added_overhead_ms": 0.434
-      }
-    },
-    {
-      "scenario_id": "SCEN_03",
-      "description": "Standard tier discount exceeding both G17 and G18 limits ($800 > $500)",
-      "baseline": {
-        "scenario_id": "SCEN_03",
-        "status": "BLOCKED_POLICY_VIOLATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.004
-      },
-      "quoin": {
-        "scenario_id": "SCEN_03",
-        "status": "POLICY_VIOLATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.189,
-        "added_overhead_ms": 0.184
-      }
-    },
-    {
-      "scenario_id": "SCEN_04",
-      "description": "Silver tier service credit valid under G18 ($400 <= $500)",
-      "baseline": {
-        "scenario_id": "SCEN_04",
-        "status": "COMMITTED",
-        "stale_execution_committed": null,
-        "latency_ms": 0.006
-      },
-      "quoin": {
-        "scenario_id": "SCEN_04",
-        "status": "COMMITTED",
-        "stale_execution_committed": false,
-        "latency_ms": 0.619,
-        "added_overhead_ms": 0.614
-      }
-    },
-    {
-      "scenario_id": "SCEN_05",
-      "description": "In-flight cutover race during proposal commit for standard discount",
-      "baseline": {
-        "scenario_id": "SCEN_05",
-        "status": "COMMITTED",
-        "stale_execution_committed": true,
-        "latency_ms": 0.14
-      },
-      "quoin": {
-        "scenario_id": "SCEN_05",
-        "status": "ABORTED_STALE_GENERATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.518,
-        "added_overhead_ms": 0.378
-      }
-    },
-    {
-      "scenario_id": "SCEN_06",
-      "description": "Duplicate replay of previously executed permit",
-      "baseline": {
-        "scenario_id": "SCEN_06",
+        "scenario_id": "SCEN_034",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
         "latency_ms": 0.007
       },
       "quoin": {
-        "scenario_id": "SCEN_06",
+        "scenario_id": "SCEN_034",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.077,
-        "added_overhead_ms": 1.07
+        "latency_ms": 1.181,
+        "added_overhead_ms": 1.174
       }
     },
     {
-      "scenario_id": "SCEN_07",
-      "description": "Executive escalation required under G18 (Platinum tier discount $2500)",
+      "scenario_id": "SCEN_035",
+      "description": "Duplicate permit replay attack / network retry #5 for silver $160.0",
       "baseline": {
-        "scenario_id": "SCEN_07",
-        "status": "COMMITTED",
-        "stale_execution_committed": null,
-        "latency_ms": 0.006
-      },
-      "quoin": {
-        "scenario_id": "SCEN_07",
-        "status": "POLICY_VIOLATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.163,
-        "added_overhead_ms": 0.157
-      }
-    },
-    {
-      "scenario_id": "SCEN_08",
-      "description": "Gold tier discount valid under G18 ($750 <= $1000)",
-      "baseline": {
-        "scenario_id": "SCEN_08",
-        "status": "COMMITTED",
-        "stale_execution_committed": null,
-        "latency_ms": 0.005
-      },
-      "quoin": {
-        "scenario_id": "SCEN_08",
-        "status": "COMMITTED",
-        "stale_execution_committed": false,
-        "latency_ms": 0.531,
-        "added_overhead_ms": 0.526
-      }
-    },
-    {
-      "scenario_id": "SCEN_09",
-      "description": "In-flight policy cutover race: G18 to G19 cuts discount ceiling from $1000 to $600",
-      "baseline": {
-        "scenario_id": "SCEN_09",
-        "status": "COMMITTED",
+        "scenario_id": "SCEN_035",
+        "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
-        "latency_ms": 0.147
+        "latency_ms": 0.009
       },
       "quoin": {
-        "scenario_id": "SCEN_09",
-        "status": "ABORTED_STALE_GENERATION",
+        "scenario_id": "SCEN_035",
+        "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 0.534,
-        "added_overhead_ms": 0.387
+        "latency_ms": 1.211,
+        "added_overhead_ms": 1.203
       }
     },
     {
-      "scenario_id": "SCEN_10",
-      "description": "Service credit dispute exceeding ceiling ($2500 > $500)",
+      "scenario_id": "SCEN_036",
+      "description": "Duplicate permit replay attack / network retry #6 for gold $175.0",
       "baseline": {
-        "scenario_id": "SCEN_10",
-        "status": "BLOCKED_POLICY_VIOLATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.004
-      },
-      "quoin": {
-        "scenario_id": "SCEN_10",
-        "status": "POLICY_VIOLATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.202,
-        "added_overhead_ms": 0.198
-      }
-    },
-    {
-      "scenario_id": "SCEN_11",
-      "description": "Standard tier within-limits discount under G18 ($250 <= $500)",
-      "baseline": {
-        "scenario_id": "SCEN_11",
-        "status": "COMMITTED",
-        "stale_execution_committed": null,
-        "latency_ms": 0.005
-      },
-      "quoin": {
-        "scenario_id": "SCEN_11",
-        "status": "COMMITTED",
-        "stale_execution_committed": false,
-        "latency_ms": 0.553,
-        "added_overhead_ms": 0.548
-      }
-    },
-    {
-      "scenario_id": "SCEN_12",
-      "description": "Policy rollback simulation: G20 restores G18 limits, but in-flight request was evaluated under G19",
-      "baseline": {
-        "scenario_id": "SCEN_12",
-        "status": "BLOCKED_POLICY_VIOLATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.146
-      },
-      "quoin": {
-        "scenario_id": "SCEN_12",
-        "status": "POLICY_VIOLATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.163,
-        "added_overhead_ms": 0.017
-      }
-    },
-    {
-      "scenario_id": "SCEN_13",
-      "description": "Standard within-limits discount under G18 ($150 <= $500)",
-      "baseline": {
-        "scenario_id": "SCEN_13",
-        "status": "COMMITTED",
-        "stale_execution_committed": null,
-        "latency_ms": 0.005
-      },
-      "quoin": {
-        "scenario_id": "SCEN_13",
-        "status": "COMMITTED",
-        "stale_execution_committed": false,
-        "latency_ms": 1.038,
-        "added_overhead_ms": 1.033
-      }
-    },
-    {
-      "scenario_id": "SCEN_14",
-      "description": "In-flight race condition: G18 to G19 standard discount limit reduced to $200 while $400 request in flight",
-      "baseline": {
-        "scenario_id": "SCEN_14",
-        "status": "COMMITTED",
-        "stale_execution_committed": true,
-        "latency_ms": 0.154
-      },
-      "quoin": {
-        "scenario_id": "SCEN_14",
-        "status": "ABORTED_STALE_GENERATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.695,
-        "added_overhead_ms": 0.542
-      }
-    },
-    {
-      "scenario_id": "SCEN_15",
-      "description": "Credit request within limits under G18 ($300 <= $500)",
-      "baseline": {
-        "scenario_id": "SCEN_15",
-        "status": "COMMITTED",
-        "stale_execution_committed": null,
-        "latency_ms": 0.005
-      },
-      "quoin": {
-        "scenario_id": "SCEN_15",
-        "status": "COMMITTED",
-        "stale_execution_committed": false,
-        "latency_ms": 0.596,
-        "added_overhead_ms": 0.591
-      }
-    },
-    {
-      "scenario_id": "SCEN_16",
-      "description": "Replay attempt of standard discount",
-      "baseline": {
-        "scenario_id": "SCEN_16",
+        "scenario_id": "SCEN_036",
         "status": "COMMITTED_DUPLICATE",
         "stale_execution_committed": true,
         "latency_ms": 0.008
       },
       "quoin": {
-        "scenario_id": "SCEN_16",
+        "scenario_id": "SCEN_036",
         "status": "DEDUPLICATED",
         "stale_execution_committed": false,
-        "latency_ms": 1.109,
-        "added_overhead_ms": 1.101
+        "latency_ms": 1.174,
+        "added_overhead_ms": 1.166
       }
     },
     {
-      "scenario_id": "SCEN_17",
-      "description": "Gold discount within limits under G18 ($950 <= $1000)",
+      "scenario_id": "SCEN_037",
+      "description": "Duplicate permit replay attack / network retry #7 for standard $190.0",
       "baseline": {
-        "scenario_id": "SCEN_17",
+        "scenario_id": "SCEN_037",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_037",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.256,
+        "added_overhead_ms": 1.248
+      }
+    },
+    {
+      "scenario_id": "SCEN_038",
+      "description": "Duplicate permit replay attack / network retry #8 for silver $205.0",
+      "baseline": {
+        "scenario_id": "SCEN_038",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.009
+      },
+      "quoin": {
+        "scenario_id": "SCEN_038",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.331,
+        "added_overhead_ms": 1.322
+      }
+    },
+    {
+      "scenario_id": "SCEN_039",
+      "description": "Duplicate permit replay attack / network retry #9 for gold $220.0",
+      "baseline": {
+        "scenario_id": "SCEN_039",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_039",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.189,
+        "added_overhead_ms": 1.182
+      }
+    },
+    {
+      "scenario_id": "SCEN_040",
+      "description": "Duplicate permit replay attack / network retry #10 for standard $235.0",
+      "baseline": {
+        "scenario_id": "SCEN_040",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_040",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.422,
+        "added_overhead_ms": 1.414
+      }
+    },
+    {
+      "scenario_id": "SCEN_041",
+      "description": "Duplicate permit replay attack / network retry #11 for silver $250.0",
+      "baseline": {
+        "scenario_id": "SCEN_041",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.009
+      },
+      "quoin": {
+        "scenario_id": "SCEN_041",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.247,
+        "added_overhead_ms": 1.238
+      }
+    },
+    {
+      "scenario_id": "SCEN_042",
+      "description": "Duplicate permit replay attack / network retry #12 for gold $265.0",
+      "baseline": {
+        "scenario_id": "SCEN_042",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.01
+      },
+      "quoin": {
+        "scenario_id": "SCEN_042",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.174,
+        "added_overhead_ms": 1.164
+      }
+    },
+    {
+      "scenario_id": "SCEN_043",
+      "description": "Duplicate permit replay attack / network retry #13 for standard $280.0",
+      "baseline": {
+        "scenario_id": "SCEN_043",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_043",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.243,
+        "added_overhead_ms": 1.235
+      }
+    },
+    {
+      "scenario_id": "SCEN_044",
+      "description": "Duplicate permit replay attack / network retry #14 for silver $295.0",
+      "baseline": {
+        "scenario_id": "SCEN_044",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.009
+      },
+      "quoin": {
+        "scenario_id": "SCEN_044",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.257,
+        "added_overhead_ms": 1.248
+      }
+    },
+    {
+      "scenario_id": "SCEN_045",
+      "description": "Duplicate permit replay attack / network retry #15 for gold $310.0",
+      "baseline": {
+        "scenario_id": "SCEN_045",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_045",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.22,
+        "added_overhead_ms": 1.212
+      }
+    },
+    {
+      "scenario_id": "SCEN_046",
+      "description": "Duplicate permit replay attack / network retry #16 for standard $325.0",
+      "baseline": {
+        "scenario_id": "SCEN_046",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_046",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.238,
+        "added_overhead_ms": 1.23
+      }
+    },
+    {
+      "scenario_id": "SCEN_047",
+      "description": "Duplicate permit replay attack / network retry #17 for silver $340.0",
+      "baseline": {
+        "scenario_id": "SCEN_047",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.009
+      },
+      "quoin": {
+        "scenario_id": "SCEN_047",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.25,
+        "added_overhead_ms": 1.241
+      }
+    },
+    {
+      "scenario_id": "SCEN_048",
+      "description": "Duplicate permit replay attack / network retry #18 for gold $355.0",
+      "baseline": {
+        "scenario_id": "SCEN_048",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.009
+      },
+      "quoin": {
+        "scenario_id": "SCEN_048",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.394,
+        "added_overhead_ms": 1.385
+      }
+    },
+    {
+      "scenario_id": "SCEN_049",
+      "description": "Duplicate permit replay attack / network retry #19 for standard $370.0",
+      "baseline": {
+        "scenario_id": "SCEN_049",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_049",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.144,
+        "added_overhead_ms": 1.136
+      }
+    },
+    {
+      "scenario_id": "SCEN_050",
+      "description": "Duplicate permit replay attack / network retry #20 for silver $385.0",
+      "baseline": {
+        "scenario_id": "SCEN_050",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_050",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.156,
+        "added_overhead_ms": 1.148
+      }
+    },
+    {
+      "scenario_id": "SCEN_051",
+      "description": "Duplicate permit replay attack / network retry #21 for gold $400.0",
+      "baseline": {
+        "scenario_id": "SCEN_051",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.009
+      },
+      "quoin": {
+        "scenario_id": "SCEN_051",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.234,
+        "added_overhead_ms": 1.226
+      }
+    },
+    {
+      "scenario_id": "SCEN_052",
+      "description": "Duplicate permit replay attack / network retry #22 for standard $415.0",
+      "baseline": {
+        "scenario_id": "SCEN_052",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_052",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.217,
+        "added_overhead_ms": 1.21
+      }
+    },
+    {
+      "scenario_id": "SCEN_053",
+      "description": "Duplicate permit replay attack / network retry #23 for silver $430.0",
+      "baseline": {
+        "scenario_id": "SCEN_053",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.009
+      },
+      "quoin": {
+        "scenario_id": "SCEN_053",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.297,
+        "added_overhead_ms": 1.288
+      }
+    },
+    {
+      "scenario_id": "SCEN_054",
+      "description": "Duplicate permit replay attack / network retry #24 for gold $445.0",
+      "baseline": {
+        "scenario_id": "SCEN_054",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.011
+      },
+      "quoin": {
+        "scenario_id": "SCEN_054",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.491,
+        "added_overhead_ms": 1.48
+      }
+    },
+    {
+      "scenario_id": "SCEN_055",
+      "description": "Duplicate permit replay attack / network retry #25 for standard $460.0",
+      "baseline": {
+        "scenario_id": "SCEN_055",
+        "status": "COMMITTED_DUPLICATE",
+        "stale_execution_committed": true,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_055",
+        "status": "DEDUPLICATED",
+        "stale_execution_committed": false,
+        "latency_ms": 1.187,
+        "added_overhead_ms": 1.18
+      }
+    },
+    {
+      "scenario_id": "SCEN_056",
+      "description": "Boundary condition: standard requested $499.0 against limit $500.0 -> ALLOW",
+      "baseline": {
+        "scenario_id": "SCEN_056",
         "status": "COMMITTED",
         "stale_execution_committed": null,
         "latency_ms": 0.006
       },
       "quoin": {
-        "scenario_id": "SCEN_17",
+        "scenario_id": "SCEN_056",
         "status": "COMMITTED",
         "stale_execution_committed": false,
-        "latency_ms": 0.546,
-        "added_overhead_ms": 0.54
+        "latency_ms": 0.705,
+        "added_overhead_ms": 0.699
       }
     },
     {
-      "scenario_id": "SCEN_18",
-      "description": "In-flight cutover race: G18 to G19 gold limit reduced from $1000 to $500 while $850 request in flight",
+      "scenario_id": "SCEN_057",
+      "description": "Boundary condition: standard requested $500.0 against limit $500.0 -> ALLOW",
       "baseline": {
-        "scenario_id": "SCEN_18",
-        "status": "COMMITTED",
-        "stale_execution_committed": true,
-        "latency_ms": 0.279
-      },
-      "quoin": {
-        "scenario_id": "SCEN_18",
-        "status": "ABORTED_STALE_GENERATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.679,
-        "added_overhead_ms": 0.4
-      }
-    },
-    {
-      "scenario_id": "SCEN_19",
-      "description": "Excessive discount request for silver tier ($900 > $600)",
-      "baseline": {
-        "scenario_id": "SCEN_19",
-        "status": "BLOCKED_POLICY_VIOLATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.006
-      },
-      "quoin": {
-        "scenario_id": "SCEN_19",
-        "status": "POLICY_VIOLATION",
-        "stale_execution_committed": false,
-        "latency_ms": 0.207,
-        "added_overhead_ms": 0.201
-      }
-    },
-    {
-      "scenario_id": "SCEN_20",
-      "description": "Standard discount within limits under G18 ($220 <= $500)",
-      "baseline": {
-        "scenario_id": "SCEN_20",
+        "scenario_id": "SCEN_057",
         "status": "COMMITTED",
         "stale_execution_committed": null,
         "latency_ms": 0.005
       },
       "quoin": {
-        "scenario_id": "SCEN_20",
+        "scenario_id": "SCEN_057",
         "status": "COMMITTED",
         "stale_execution_committed": false,
-        "latency_ms": 0.769,
-        "added_overhead_ms": 0.764
+        "latency_ms": 0.661,
+        "added_overhead_ms": 0.655
+      }
+    },
+    {
+      "scenario_id": "SCEN_058",
+      "description": "Boundary condition: standard requested $500.01 against limit $500.0 -> BLOCK_POLICY_VIOLATION",
+      "baseline": {
+        "scenario_id": "SCEN_058",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_058",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.21,
+        "added_overhead_ms": 0.205
+      }
+    },
+    {
+      "scenario_id": "SCEN_059",
+      "description": "Boundary condition: standard requested $501.0 against limit $500.0 -> BLOCK_POLICY_VIOLATION",
+      "baseline": {
+        "scenario_id": "SCEN_059",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_059",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.239,
+        "added_overhead_ms": 0.234
+      }
+    },
+    {
+      "scenario_id": "SCEN_060",
+      "description": "Boundary condition: gold requested $999.0 against limit $1000.0 -> ALLOW",
+      "baseline": {
+        "scenario_id": "SCEN_060",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.009
+      },
+      "quoin": {
+        "scenario_id": "SCEN_060",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.697,
+        "added_overhead_ms": 0.688
+      }
+    },
+    {
+      "scenario_id": "SCEN_061",
+      "description": "Boundary condition: gold requested $1000.0 against limit $1000.0 -> ALLOW",
+      "baseline": {
+        "scenario_id": "SCEN_061",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_061",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.623,
+        "added_overhead_ms": 0.617
+      }
+    },
+    {
+      "scenario_id": "SCEN_062",
+      "description": "Boundary condition: gold requested $1000.01 against limit $1000.0 -> BLOCK_POLICY_VIOLATION",
+      "baseline": {
+        "scenario_id": "SCEN_062",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_062",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.223,
+        "added_overhead_ms": 0.218
+      }
+    },
+    {
+      "scenario_id": "SCEN_063",
+      "description": "Boundary condition: gold requested $1002.0 against limit $1000.0 -> BLOCK_POLICY_VIOLATION",
+      "baseline": {
+        "scenario_id": "SCEN_063",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_063",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.238,
+        "added_overhead_ms": 0.233
+      }
+    },
+    {
+      "scenario_id": "SCEN_064",
+      "description": "Boundary condition: silver requested $599.0 against limit $600.0 -> ALLOW",
+      "baseline": {
+        "scenario_id": "SCEN_064",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_064",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.648,
+        "added_overhead_ms": 0.642
+      }
+    },
+    {
+      "scenario_id": "SCEN_065",
+      "description": "Boundary condition: silver requested $600.0 against limit $600.0 -> ALLOW",
+      "baseline": {
+        "scenario_id": "SCEN_065",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_065",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.662,
+        "added_overhead_ms": 0.656
+      }
+    },
+    {
+      "scenario_id": "SCEN_066",
+      "description": "Boundary condition: silver requested $600.5 against limit $600.0 -> BLOCK_POLICY_VIOLATION",
+      "baseline": {
+        "scenario_id": "SCEN_066",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_066",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.244,
+        "added_overhead_ms": 0.239
+      }
+    },
+    {
+      "scenario_id": "SCEN_067",
+      "description": "Boundary condition: silver requested $605.0 against limit $600.0 -> BLOCK_POLICY_VIOLATION",
+      "baseline": {
+        "scenario_id": "SCEN_067",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.008
+      },
+      "quoin": {
+        "scenario_id": "SCEN_067",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.275,
+        "added_overhead_ms": 0.267
+      }
+    },
+    {
+      "scenario_id": "SCEN_068",
+      "description": "Boundary condition: platinum requested $2499.0 against limit $2500.0 -> BLOCK_ESCALATION",
+      "baseline": {
+        "scenario_id": "SCEN_068",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_068",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.225,
+        "added_overhead_ms": 0.219
+      }
+    },
+    {
+      "scenario_id": "SCEN_069",
+      "description": "Boundary condition: platinum requested $2500.0 against limit $2500.0 -> BLOCK_ESCALATION",
+      "baseline": {
+        "scenario_id": "SCEN_069",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_069",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.208,
+        "added_overhead_ms": 0.202
+      }
+    },
+    {
+      "scenario_id": "SCEN_070",
+      "description": "Boundary condition: platinum requested $2500.01 against limit $2500.0 -> BLOCK_ESCALATION",
+      "baseline": {
+        "scenario_id": "SCEN_070",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_070",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.205,
+        "added_overhead_ms": 0.199
+      }
+    },
+    {
+      "scenario_id": "SCEN_071",
+      "description": "Boundary condition: platinum requested $2600.0 against limit $2500.0 -> BLOCK_ESCALATION",
+      "baseline": {
+        "scenario_id": "SCEN_071",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_071",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.26,
+        "added_overhead_ms": 0.254
+      }
+    },
+    {
+      "scenario_id": "SCEN_072",
+      "description": "Boundary condition: standard requested $299.0 against limit $300.0 -> ALLOW",
+      "baseline": {
+        "scenario_id": "SCEN_072",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_072",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.726,
+        "added_overhead_ms": 0.72
+      }
+    },
+    {
+      "scenario_id": "SCEN_073",
+      "description": "Boundary condition: standard requested $300.0 against limit $300.0 -> ALLOW",
+      "baseline": {
+        "scenario_id": "SCEN_073",
+        "status": "COMMITTED",
+        "stale_execution_committed": null,
+        "latency_ms": 0.006
+      },
+      "quoin": {
+        "scenario_id": "SCEN_073",
+        "status": "COMMITTED",
+        "stale_execution_committed": false,
+        "latency_ms": 0.831,
+        "added_overhead_ms": 0.825
+      }
+    },
+    {
+      "scenario_id": "SCEN_074",
+      "description": "Boundary condition: standard requested $301.0 against limit $300.0 -> BLOCK_POLICY_VIOLATION",
+      "baseline": {
+        "scenario_id": "SCEN_074",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.005
+      },
+      "quoin": {
+        "scenario_id": "SCEN_074",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.418,
+        "added_overhead_ms": 0.414
+      }
+    },
+    {
+      "scenario_id": "SCEN_075",
+      "description": "Boundary condition: standard requested $350.0 against limit $300.0 -> BLOCK_POLICY_VIOLATION",
+      "baseline": {
+        "scenario_id": "SCEN_075",
+        "status": "BLOCKED_POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.009
+      },
+      "quoin": {
+        "scenario_id": "SCEN_075",
+        "status": "POLICY_VIOLATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.279,
+        "added_overhead_ms": 0.27
+      }
+    },
+    {
+      "scenario_id": "SCEN_076",
+      "description": "Policy rollback attempt #1: Active authority is G18, client requests evaluation under obsolete G16",
+      "baseline": {
+        "scenario_id": "SCEN_076",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.167
+      },
+      "quoin": {
+        "scenario_id": "SCEN_076",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.696,
+        "added_overhead_ms": 0.529
+      }
+    },
+    {
+      "scenario_id": "SCEN_077",
+      "description": "Policy rollback attempt #2: Active authority is G18, client requests evaluation under obsolete G15",
+      "baseline": {
+        "scenario_id": "SCEN_077",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.161
+      },
+      "quoin": {
+        "scenario_id": "SCEN_077",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.766,
+        "added_overhead_ms": 0.606
+      }
+    },
+    {
+      "scenario_id": "SCEN_078",
+      "description": "Policy rollback attempt #3: Active authority is G18, client requests evaluation under obsolete G14",
+      "baseline": {
+        "scenario_id": "SCEN_078",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.169
+      },
+      "quoin": {
+        "scenario_id": "SCEN_078",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.718,
+        "added_overhead_ms": 0.549
+      }
+    },
+    {
+      "scenario_id": "SCEN_079",
+      "description": "Policy rollback attempt #4: Active authority is G18, client requests evaluation under obsolete G16",
+      "baseline": {
+        "scenario_id": "SCEN_079",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.194
+      },
+      "quoin": {
+        "scenario_id": "SCEN_079",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.725,
+        "added_overhead_ms": 0.531
+      }
+    },
+    {
+      "scenario_id": "SCEN_080",
+      "description": "Policy rollback attempt #5: Active authority is G18, client requests evaluation under obsolete G15",
+      "baseline": {
+        "scenario_id": "SCEN_080",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.168
+      },
+      "quoin": {
+        "scenario_id": "SCEN_080",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.744,
+        "added_overhead_ms": 0.577
+      }
+    },
+    {
+      "scenario_id": "SCEN_081",
+      "description": "Policy rollback attempt #6: Active authority is G18, client requests evaluation under obsolete G14",
+      "baseline": {
+        "scenario_id": "SCEN_081",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.183
+      },
+      "quoin": {
+        "scenario_id": "SCEN_081",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.801,
+        "added_overhead_ms": 0.618
+      }
+    },
+    {
+      "scenario_id": "SCEN_082",
+      "description": "Policy rollback attempt #7: Active authority is G18, client requests evaluation under obsolete G16",
+      "baseline": {
+        "scenario_id": "SCEN_082",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.203
+      },
+      "quoin": {
+        "scenario_id": "SCEN_082",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.723,
+        "added_overhead_ms": 0.52
+      }
+    },
+    {
+      "scenario_id": "SCEN_083",
+      "description": "Policy rollback attempt #8: Active authority is G18, client requests evaluation under obsolete G15",
+      "baseline": {
+        "scenario_id": "SCEN_083",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.178
+      },
+      "quoin": {
+        "scenario_id": "SCEN_083",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.836,
+        "added_overhead_ms": 0.658
+      }
+    },
+    {
+      "scenario_id": "SCEN_084",
+      "description": "Policy rollback attempt #9: Active authority is G18, client requests evaluation under obsolete G14",
+      "baseline": {
+        "scenario_id": "SCEN_084",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.218
+      },
+      "quoin": {
+        "scenario_id": "SCEN_084",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.741,
+        "added_overhead_ms": 0.523
+      }
+    },
+    {
+      "scenario_id": "SCEN_085",
+      "description": "Policy rollback attempt #10: Active authority is G18, client requests evaluation under obsolete G16",
+      "baseline": {
+        "scenario_id": "SCEN_085",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.229
+      },
+      "quoin": {
+        "scenario_id": "SCEN_085",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 1.347,
+        "added_overhead_ms": 1.119
+      }
+    },
+    {
+      "scenario_id": "SCEN_086",
+      "description": "Policy rollback attempt #11: Active authority is G18, client requests evaluation under obsolete G15",
+      "baseline": {
+        "scenario_id": "SCEN_086",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.372
+      },
+      "quoin": {
+        "scenario_id": "SCEN_086",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.747,
+        "added_overhead_ms": 0.375
+      }
+    },
+    {
+      "scenario_id": "SCEN_087",
+      "description": "Policy rollback attempt #12: Active authority is G18, client requests evaluation under obsolete G14",
+      "baseline": {
+        "scenario_id": "SCEN_087",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.183
+      },
+      "quoin": {
+        "scenario_id": "SCEN_087",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 1.252,
+        "added_overhead_ms": 1.069
+      }
+    },
+    {
+      "scenario_id": "SCEN_088",
+      "description": "Policy rollback attempt #13: Active authority is G18, client requests evaluation under obsolete G16",
+      "baseline": {
+        "scenario_id": "SCEN_088",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.304
+      },
+      "quoin": {
+        "scenario_id": "SCEN_088",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.695,
+        "added_overhead_ms": 0.392
+      }
+    },
+    {
+      "scenario_id": "SCEN_089",
+      "description": "Policy rollback attempt #14: Active authority is G18, client requests evaluation under obsolete G15",
+      "baseline": {
+        "scenario_id": "SCEN_089",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.166
+      },
+      "quoin": {
+        "scenario_id": "SCEN_089",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.702,
+        "added_overhead_ms": 0.536
+      }
+    },
+    {
+      "scenario_id": "SCEN_090",
+      "description": "Policy rollback attempt #15: Active authority is G18, client requests evaluation under obsolete G14",
+      "baseline": {
+        "scenario_id": "SCEN_090",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.189
+      },
+      "quoin": {
+        "scenario_id": "SCEN_090",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.969,
+        "added_overhead_ms": 0.78
+      }
+    },
+    {
+      "scenario_id": "SCEN_091",
+      "description": "Rapid cutover #1: In-flight authority advances multiple epochs G17 -> G18 -> G19",
+      "baseline": {
+        "scenario_id": "SCEN_091",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.187
+      },
+      "quoin": {
+        "scenario_id": "SCEN_091",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.714,
+        "added_overhead_ms": 0.527
+      }
+    },
+    {
+      "scenario_id": "SCEN_092",
+      "description": "Rapid cutover #2: In-flight authority advances multiple epochs G17 -> G18 -> G19",
+      "baseline": {
+        "scenario_id": "SCEN_092",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.168
+      },
+      "quoin": {
+        "scenario_id": "SCEN_092",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.742,
+        "added_overhead_ms": 0.574
+      }
+    },
+    {
+      "scenario_id": "SCEN_093",
+      "description": "Rapid cutover #3: In-flight authority advances multiple epochs G17 -> G18 -> G19",
+      "baseline": {
+        "scenario_id": "SCEN_093",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.172
+      },
+      "quoin": {
+        "scenario_id": "SCEN_093",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.831,
+        "added_overhead_ms": 0.659
+      }
+    },
+    {
+      "scenario_id": "SCEN_094",
+      "description": "Rapid cutover #4: In-flight authority advances multiple epochs G17 -> G18 -> G19",
+      "baseline": {
+        "scenario_id": "SCEN_094",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.179
+      },
+      "quoin": {
+        "scenario_id": "SCEN_094",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.724,
+        "added_overhead_ms": 0.546
+      }
+    },
+    {
+      "scenario_id": "SCEN_095",
+      "description": "Rapid cutover #5: In-flight authority advances multiple epochs G17 -> G18 -> G19",
+      "baseline": {
+        "scenario_id": "SCEN_095",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.172
+      },
+      "quoin": {
+        "scenario_id": "SCEN_095",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.838,
+        "added_overhead_ms": 0.666
+      }
+    },
+    {
+      "scenario_id": "SCEN_096",
+      "description": "Rapid cutover #6: In-flight authority advances multiple epochs G17 -> G18 -> G19",
+      "baseline": {
+        "scenario_id": "SCEN_096",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.186
+      },
+      "quoin": {
+        "scenario_id": "SCEN_096",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.724,
+        "added_overhead_ms": 0.538
+      }
+    },
+    {
+      "scenario_id": "SCEN_097",
+      "description": "Rapid cutover #7: In-flight authority advances multiple epochs G17 -> G18 -> G19",
+      "baseline": {
+        "scenario_id": "SCEN_097",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.172
+      },
+      "quoin": {
+        "scenario_id": "SCEN_097",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.775,
+        "added_overhead_ms": 0.604
+      }
+    },
+    {
+      "scenario_id": "SCEN_098",
+      "description": "Rapid cutover #8: In-flight authority advances multiple epochs G17 -> G18 -> G19",
+      "baseline": {
+        "scenario_id": "SCEN_098",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.357
+      },
+      "quoin": {
+        "scenario_id": "SCEN_098",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.819,
+        "added_overhead_ms": 0.462
+      }
+    },
+    {
+      "scenario_id": "SCEN_099",
+      "description": "Rapid cutover #9: In-flight authority advances multiple epochs G17 -> G18 -> G19",
+      "baseline": {
+        "scenario_id": "SCEN_099",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.207
+      },
+      "quoin": {
+        "scenario_id": "SCEN_099",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 0.691,
+        "added_overhead_ms": 0.484
+      }
+    },
+    {
+      "scenario_id": "SCEN_100",
+      "description": "Rapid cutover #10: In-flight authority advances multiple epochs G17 -> G18 -> G19",
+      "baseline": {
+        "scenario_id": "SCEN_100",
+        "status": "COMMITTED",
+        "stale_execution_committed": true,
+        "latency_ms": 0.17
+      },
+      "quoin": {
+        "scenario_id": "SCEN_100",
+        "status": "ABORTED_STALE_GENERATION",
+        "stale_execution_committed": false,
+        "latency_ms": 1.447,
+        "added_overhead_ms": 1.278
       }
     }
   ]

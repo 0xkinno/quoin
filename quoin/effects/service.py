@@ -12,8 +12,12 @@ from .idempotency import IdempotencyLedger, ExecutionRecord
 class OperationalEffectService:
     """Dispatches and commits business side-effects under cryptographic permits."""
 
-    def __init__(self, idempotency_ledger: Optional[IdempotencyLedger] = None):
-        self.ledger = idempotency_ledger or IdempotencyLedger()
+    def __init__(
+        self,
+        idempotency_ledger: Optional[IdempotencyLedger] = None,
+        ledger: Optional[IdempotencyLedger] = None,
+    ):
+        self.ledger = idempotency_ledger or ledger or IdempotencyLedger()
 
     def _verify_permit(self, permit: ExecutionPermit, expected_effect_hash: str) -> None:
         """Verify that the permit is genuine, unexpired, and matches intended effect."""
@@ -148,5 +152,55 @@ class OperationalEffectService:
             "action": "issue_service_credit",
             "credit_amount": credit_amount,
             "execution_id": rec.permit_id,
+            "record": rec.model_dump(),
+        }
+
+    def apply_commercial_discount(
+        self,
+        permit: Optional[ExecutionPermit],
+        request_id: str,
+        customer_id: str,
+        invoice_id: str,
+        discount_amount: float,
+        **kwargs,
+    ) -> Dict[str, Any]:
+        """High-level entrypoint for commercial discount execution with permit enforcement."""
+        if permit is None:
+            raise ValueError("ExecutionPermit is required to apply commercial discount. Unpermitted execution blocked.")
+
+        now = datetime.now(timezone.utc)
+        if now > permit.expires_at:
+            raise ValueError(f"Permit {permit.permit_id} is expired.")
+
+        existing = self.ledger.get_existing(permit.permit_id, request_id, permit.effect_hash)
+        if existing:
+            return {
+                "status": "DEDUPLICATED",
+                "applied": False,
+                "message": "Discount already applied under this permit.",
+                "record": existing.model_dump(),
+                "duplicate_attempt": True,
+            }
+
+        rec = self.ledger.record_execution(
+            permit_id=permit.permit_id,
+            receipt_id=permit.receipt_id,
+            request_id=request_id,
+            generation=permit.policy_generation,
+            effect_hash=permit.effect_hash,
+            result={
+                "action": "apply_commercial_discount",
+                "customer_id": customer_id,
+                "invoice_id": invoice_id,
+                "discount_amount": discount_amount,
+                "generation": permit.policy_generation,
+            },
+        )
+        return {
+            "status": "SUCCESS",
+            "applied": True,
+            "action": "apply_commercial_discount",
+            "discount_amount": discount_amount,
+            "permit_id": permit.permit_id,
             "record": rec.model_dump(),
         }
